@@ -1,6 +1,5 @@
 //import { defineConfig } from 'vite';
-import { defineConfig } from 'vitest/config'
-import macrosPlugin from 'vite-plugin-babel-macros';
+import { defineConfig } from 'vitest/config';
 import { VitePWA } from 'vite-plugin-pwa';
 import react from '@vitejs/plugin-react-swc';
 
@@ -10,9 +9,9 @@ import react from '@vitejs/plugin-react-swc';
 // })
 
 export default defineConfig({
+  css: { modules: { localsConvention: 'camelCaseOnly' } },
   plugins: [
     react(),
-    macrosPlugin(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],

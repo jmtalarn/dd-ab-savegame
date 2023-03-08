@@ -1,0 +1,26 @@
+svg {
+  font-size: 24px;
+}
+.fighter,
+.dwarf {
+  color: yellow !important;
+}
+.sorcerer,
+.human {
+  color: blue !important;
+}
+.bard,
+.elf {
+  color: green !important;
+}
+.rogue,
+.dragonborn {
+  color: red !important;
+}
+
+.dungeon-index {
+  --fa-primary-color: white !important;
+  --fa-secondary-color: dodgerblue !important;
+  --fa-primary-opacity: 1 !important;
+  --fa-secondary-opacity: 1 !important;
+}

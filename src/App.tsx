@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid, regular, light, thin, duotone, icon, brands } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
+import { faReact } from '@fortawesome/free-brands-svg-icons';
+import { Button } from 'antd';
 
+import 'antd/dist/reset.css';
 import './App.css';
 
 function App() {
@@ -14,12 +16,14 @@ function App() {
           <img src="/mask-icon.svg" className="logo" alt="Vite logo" />
         </a>
         <a href="https://reactjs.org" target="_blank">
-          <FontAwesomeIcon icon={brands('react')} size="8x"/>
+          <FontAwesomeIcon icon={faReact} size="8x" />
         </a>
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+        <Button type="primary" onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
