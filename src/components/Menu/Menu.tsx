@@ -3,7 +3,7 @@ import type { MenuProps } from 'antd';
 import { Menu as MenuAntd } from 'antd';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import CharacterName from '../CharacterName';
 import {
   faSkull,
   faDungeon,
@@ -18,16 +18,10 @@ import {
   faCircle3,
 } from '@fortawesome/pro-duotone-svg-icons';
 import styles from './Menu.module.css';
-//dungeon
-//eye-evil
-//dice-d20
-//dice-d10
-//dagger
-//axe-battle
-//swords
-//sword
-//scroll-old
-//puzzle
+
+import generic from '../../styles/generic.module.css';
+import { Class } from '../Character/Character.types';
+
 const items: ItemType[] = [
   {
     key: 'final boss',
@@ -100,39 +94,19 @@ const items: ItemType[] = [
     children: [
       {
         key: 'fighter',
-        icon: (
-          <div>
-            <FontAwesomeIcon icon={faAxeBattle} className={styles.fighter} />
-          </div>
-        ),
-        label: <span className={styles.fighter}>Fighter</span>,
+        label: <CharacterName classType={Class.Fighter} text="Fighter" />,
       },
       {
         key: 'sorcerer',
-        icon: (
-          <div>
-            <FontAwesomeIcon icon={faHatWizard} className={styles.sorcerer} />
-          </div>
-        ),
-        label: <span className={styles.sorcerer}>Sorcerer</span>,
+        label: <CharacterName classType={Class.Sorcerer} text="Sorcerer" />,
       },
       {
         key: 'bard',
-        icon: (
-          <div>
-            <FontAwesomeIcon icon={faBowArrow} className={styles.bard} />
-          </div>
-        ),
-        label: <span className={styles.bard}>Bard</span>,
+        label: <CharacterName classType={Class.Bard} text="Bard" />,
       },
       {
         key: 'rogue',
-        icon: (
-          <div>
-            <FontAwesomeIcon icon={faDagger} className={styles.rogue} />
-          </div>
-        ),
-        label: <span className={styles.rogue}>Rogue</span>,
+        label: <CharacterName classType={Class.Rogue} text="Rogue" />,
       },
     ],
   },

@@ -1,23 +1,34 @@
-.page {
-  display: flex;
-  flex-direction: column;
+.drawer {
   position: fixed;
+  top: 0;
   height: 100%;
-  background-color: transparent;
+  width: 100%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   left: calc(100vw + 8px);
-  box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.75);
+
+  padding: 0;
 }
-.page.unstacked {
+.drawer-closed {
   animation: 0.5s ease-in 0s slide-out backwards;
 }
-.page.stacked {
+.drawer-open {
   animation: 0.5s ease-in 0.2s slide-in forwards;
 }
+.layout {
+  background-color: transparent;
+  height: 100%;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .header {
   font-weight: bolder;
   background-color: transparent;
   padding: 0;
   border-bottom: 1px solid lightsteelblue;
+  display: flex;
+  align-items: center;
 }
 .header button {
   margin: 0 1em 0 0.5em;
