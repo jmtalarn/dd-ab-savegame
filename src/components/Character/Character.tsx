@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faVenus, faMars } from '@fortawesome/pro-solid-svg-icons';
 import styles from './Character.module.css';
-import generic from '../../styles/generic.module.css';
+import '../../styles/generic.module.css';
 import { Character, PlayerStats, Sex } from './Character.types';
 import CharacterName from '../CharacterName';
 import { capitalize } from '../../utils';

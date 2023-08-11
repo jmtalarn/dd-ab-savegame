@@ -9,17 +9,13 @@ import {
   faDungeon,
   faRoute,
   faSwords,
-  faAxeBattle,
-  faHatWizard,
-  faDagger,
-  faBowArrow,
   faCircle1,
   faCircle2,
   faCircle3,
 } from '@fortawesome/pro-duotone-svg-icons';
 import styles from './Menu.module.css';
 
-import generic from '../../styles/generic.module.css';
+import '../../styles/generic.module.css';
 import { Class } from '../Character/Character.types';
 
 const items: ItemType[] = [
@@ -40,6 +36,7 @@ const items: ItemType[] = [
       </div>
     ),
     label: 'Dungeons',
+
     children: [
       {
         key: 'dungeon 1',
@@ -91,6 +88,7 @@ const items: ItemType[] = [
       </div>
     ),
     label: 'Heroes',
+
     children: [
       {
         key: 'fighter',
