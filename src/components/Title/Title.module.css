@@ -1,0 +1,16 @@
+.header{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  
+}
+.title {
+  display: flex;
+  align-items:center;
+  gap: 5px;
+  margin: 5px;
+}
+.title-icon {
+  width: 2em !important;
+  min-width: 2em;
+}

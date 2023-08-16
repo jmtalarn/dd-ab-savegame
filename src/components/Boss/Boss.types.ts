@@ -1,3 +1,5 @@
+import { Dungeon } from "../Dungeon/Dungeon.types"
+
 export enum Boss {
 	Kraken = 'El kraken',
 	Felbris = 'Felbris, el contemplador', //"El bosque de Neverwinter",
@@ -5,13 +7,6 @@ export enum Boss {
 	Deathsleep = 'Deathsleep, el dragon verde'
 }
 
-
-export enum Dungeon {
-	Gauntlgrym = 'Gauntlgrym',
-	Neverwinter = 'Neverwinter',
-	NeverwinterForest = 'Bosque de Neverwinter',
-	HotenowMount = 'Monte Hotenow',
-}
 
 
 export const BossDungeonMap: Map<Boss, Dungeon> = new Map([
