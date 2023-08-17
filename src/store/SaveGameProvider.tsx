@@ -6,10 +6,6 @@ import {
 } from '../components/Character/Character.types';
 
 
-const initialState = {};
-
-export const SaveGameContext = createContext();
-
 export type SaveGameType = {
 	boss?: Boss;
 	dungeons?: Array<Dungeon>;
@@ -20,8 +16,23 @@ export type SaveGameType = {
 		[Class.Rogue]: Character;
 	};
 }
-export const SaveGameProvider = (props) => {
+
+export type SaveGameContextType = {
+	saveGame: SaveGameType,
+	setBoss: (boss: Boss) => void;
+	setDungeon: (dungeon: Dungeon, index: 0 | 1 | 2) => void;
+	setCharacter: (character: Character, index: Class) => void;
+}
+
+export const SaveGameContext = createContext<SaveGameContextType | undefined>();
+
+type SaveGameProviderProps = {
+	initialState?: SaveGameType;
+	children?: React.ReactNode
+}
+export const SaveGameProvider = ({ initialState, children }: SaveGameProviderProps) => {
 	// this state will be shared with all components 
+
 	const [saveGame, setSaveGame] = useState<SaveGameType>(initialState);
 
 	const setBoss = (boss: Boss) => {
@@ -50,7 +61,7 @@ export const SaveGameProvider = (props) => {
 	}
 	return (
 		<SaveGameContext.Provider value={{ saveGame, setBoss, setDungeon, setCharacter }}>
-			{props.children}
+			{children}
 		</SaveGameContext.Provider>
 	);
 };

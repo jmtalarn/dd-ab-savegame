@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { SaveGameContext } from '../../../store/SaveGameProvider';
-import { Boss } from '../../../components/Boss'
+import Boss from '../../../components/Boss'
 
 
 const BossWithContext = () => {
