@@ -19,9 +19,9 @@ export type SaveGameType = {
 
 export type SaveGameContextType = {
 	saveGame: SaveGameType,
-	setBoss: (boss: Boss) => void;
-	setDungeon: (dungeon: Dungeon, index: 0 | 1 | 2) => void;
-	setCharacter: (character: Character, index: Class) => void;
+	setBoss: ({ boss }: { boss: Boss }) => void;
+	setDungeon: ({ dungeon, index }: { dungeon: Dungeon, index: 0 | 1 | 2 }) => void;
+	setCharacter: ({ character, index }: { character: Character, index: Class }) => void;
 }
 
 export const SaveGameContext = createContext<SaveGameContextType>();
@@ -35,24 +35,24 @@ export const SaveGameProvider = ({ initialState = {}, children }: SaveGameProvid
 
 	const [saveGame, setSaveGame] = useState<SaveGameType>(initialState);
 
-	const setBoss = (boss: Boss) => {
+	const setBoss = ({ boss }: { boss: Boss }) => {
 		const dungeons = [...saveGame.dungeons];
-		dungeons[3] = BossDungeonMap[boss];
+		dungeons[3] = BossDungeonMap.get(Boss[boss]);
 		setSaveGame({
 			...saveGame,
 			boss,
 			dungeons: [...dungeons]
 		});
 	}
-	const setDungeon = (dungeon: Dungeon, index: 0 | 1 | 2) => {
+	const setDungeon = ({ dungeon, index }: { dungeon: Dungeon, index: 0 | 1 | 2 }) => {
 		const dungeons = [...saveGame.dungeons];
-		dungeons[index] = dungeon;
+		dungeons[index] = Dungeon[dungeon];
 		setSaveGame({
 			...saveGame,
 			dungeons: [...dungeons]
 		});
 	}
-	const setCharacter = (character: Character, index: Class) => {
+	const setCharacter = ({ character, index }: { character: Character, index: Class }) => {
 		const { players } = saveGame;
 		setSaveGame({
 			...saveGame,

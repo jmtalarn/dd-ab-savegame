@@ -16,7 +16,7 @@ const PlayerWithContext = ({ playerClass = Class.Fighter }: Props) => {
 	return <Player
 		playerClass={playerClass}
 		playerStats={player}
-		onSave={setCharacter}
+		onSave={(values) => setCharacter({ character: values, index: playerClass })}
 	/>
 }
 

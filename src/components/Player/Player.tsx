@@ -25,7 +25,6 @@ const characterClassOptionsMap = ({
 
 const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, playerClass, onSave }: Props) => {
   const [form] = Form.useForm();
-  console.log({ playerClass })
 
   const charactersMap = new Map(Characters.map((character: Character) => ([character.name, character])));
   const backpacksMap = new Map(BackPacks.map((item: BackpackType) => ([item.backpack, item])));
@@ -70,7 +69,6 @@ const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, playerClass, o
 
 
   const onFinish = (values: PlayerStats) => {
-    console.log({ ...values, character, backpack });
     onSave?.(values);
   };
 

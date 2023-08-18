@@ -14,7 +14,7 @@ export default {
 } as ComponentMeta<typeof Menu>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Menu> = (args) => <Menu />; //{...args} />;
+const Template: ComponentStory<typeof Menu> = () => <Menu />; //{...args} />;
 
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

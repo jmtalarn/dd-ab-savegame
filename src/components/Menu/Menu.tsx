@@ -18,9 +18,23 @@ import styles from './Menu.module.css';
 import '../../styles/generic.module.css';
 import { Class } from '../Character/Character.types';
 
+export enum MenuKeys {
+  FinalBoss = 'final boss',
+  Dungeons = 'dungeons',
+  Dungeon1 = 'dungeon 1',
+  Dungeon2 = 'dungeon 2',
+  Dungeon3 = 'dungeon 3',
+  Dungeon4 = 'dungeon 4',
+  Heroes = 'heroes',
+  Fighter = 'fighter',
+  Sorcerer = 'sorcerer',
+  Rogue = 'rogue',
+  Bard = 'bard'
+}
+
 const items: ItemType[] = [
   {
-    key: 'final boss',
+    key: MenuKeys.FinalBoss,
     icon: (
       <div>
         <FontAwesomeIcon icon={faSkull} />
@@ -29,7 +43,7 @@ const items: ItemType[] = [
     label: 'Final Boss',
   },
   {
-    key: 'dungeons',
+    key: MenuKeys.Dungeons,
     icon: (
       <div>
         <FontAwesomeIcon icon={faRoute} />
@@ -39,7 +53,7 @@ const items: ItemType[] = [
 
     children: [
       {
-        key: 'dungeon 1',
+        key: MenuKeys.Dungeon1,
         icon: (
           <div className="fa-layers fa-fw">
             <FontAwesomeIcon icon={faDungeon} />
@@ -49,7 +63,7 @@ const items: ItemType[] = [
         label: 'First dungeon',
       },
       {
-        key: 'dungeon 2',
+        key: MenuKeys.Dungeon2,
         icon: (
           <div className="fa-layers fa-fw">
             <FontAwesomeIcon icon={faDungeon} />
@@ -59,7 +73,7 @@ const items: ItemType[] = [
         label: 'Second dungeon',
       },
       {
-        key: 'dungeon 3',
+        key: MenuKeys.Dungeon3,
         icon: (
           <div className="fa-layers fa-fw">
             <FontAwesomeIcon icon={faDungeon} />
@@ -69,7 +83,7 @@ const items: ItemType[] = [
         label: 'Third dungeon',
       },
       {
-        key: 'dungeon 4',
+        key: MenuKeys.Dungeon4,
         icon: (
           <div className="fa-layers fa-fw">
             <FontAwesomeIcon icon={faDungeon} />
@@ -81,7 +95,7 @@ const items: ItemType[] = [
     ],
   },
   {
-    key: 'heroes',
+    key: MenuKeys.Heroes,
     icon: (
       <div>
         <FontAwesomeIcon icon={faSwords} />
@@ -91,25 +105,35 @@ const items: ItemType[] = [
 
     children: [
       {
-        key: 'fighter',
+        key: MenuKeys.Fighter,
         label: <CharacterName classType={Class.Fighter} text="Fighter" />,
       },
       {
-        key: 'sorcerer',
+        key: MenuKeys.Sorcerer,
         label: <CharacterName classType={Class.Sorcerer} text="Sorcerer" />,
       },
       {
-        key: 'bard',
+        key: MenuKeys.Bard,
         label: <CharacterName classType={Class.Bard} text="Bard" />,
       },
       {
-        key: 'rogue',
+        key: MenuKeys.Rogue,
         label: <CharacterName classType={Class.Rogue} text="Rogue" />,
       },
     ],
   },
 ];
 
-const Menu = () => <MenuAntd mode="inline" items={items} openKeys={['heroes', 'dungeons']}></MenuAntd>;
+
+type MenuAntdProps = {
+  onClick?: MenuProps['onClick'];
+}
+
+const Menu = ({ onClick }: MenuAntdProps) => <MenuAntd
+  onClick={onClick}
+  mode="inline"
+  items={items}
+  openKeys={[MenuKeys.Heroes, MenuKeys.Dungeons]}
+/>;
 
 export default Menu;

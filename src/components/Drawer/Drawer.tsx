@@ -11,9 +11,10 @@ type Props = {
   children?: React.ReactNode;
   title: string;
   open?: boolean;
+  onClose?: () => void
 };
 
-const Drawer = ({ children, title, open = true }: Props) => {
+const Drawer = ({ children, title, open = true, onClose }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   useEffect(() => {
     setIsOpen(open);
@@ -27,6 +28,7 @@ const Drawer = ({ children, title, open = true }: Props) => {
               type="text"
               onClick={() => {
                 setIsOpen(!isOpen);
+                onClose?.();
               }}
               shape="circle"
               icon={<FontAwesomeIcon icon={faArrowLeft} />}

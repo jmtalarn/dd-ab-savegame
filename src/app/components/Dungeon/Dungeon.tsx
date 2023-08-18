@@ -16,7 +16,7 @@ const DungeonWithContext = ({ index = 0 }: Props) => {
 	return <Dungeon
 		dungeon={dungeon}
 		blocked={index === 3}
-		onSave={setDungeon}
+		onSave={({ dungeon }) => { setDungeon({ dungeon, index }) }}
 	/>
 }
 
