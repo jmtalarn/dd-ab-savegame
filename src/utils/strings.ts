@@ -8,4 +8,4 @@ export const enumToOptions = (e) =>
 
 
 
-export const enumKeyForValue = (value, enumObject) => { return Object.entries(enumObject).find(([key, val]) => val === value)[0]; }
+export const enumKeyForValue = (value, enumObject) => { return Object.entries(enumObject).find(([_, val]) => val === value)[0]; }

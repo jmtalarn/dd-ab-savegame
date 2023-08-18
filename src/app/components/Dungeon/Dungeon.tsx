@@ -9,7 +9,7 @@ import { Dungeon as Dungeons } from '../../../components/Dungeon/Dungeon.types';
 type Props = {
 	index: 0 | 1 | 2 | 3;
 }
-const DungeonWithContext = ({ index }: Props) => {
+const DungeonWithContext = ({ index = 0 }: Props) => {
 	const { saveGame, setDungeon } = useContext(SaveGameContext);
 	const { dungeons } = saveGame;
 	const dungeon = dungeons[index] as Dungeons

@@ -24,13 +24,13 @@ export type SaveGameContextType = {
 	setCharacter: (character: Character, index: Class) => void;
 }
 
-export const SaveGameContext = createContext<SaveGameContextType | undefined>();
+export const SaveGameContext = createContext<SaveGameContextType>();
 
 type SaveGameProviderProps = {
 	initialState?: SaveGameType;
 	children?: React.ReactNode
 }
-export const SaveGameProvider = ({ initialState, children }: SaveGameProviderProps) => {
+export const SaveGameProvider = ({ initialState = {}, children }: SaveGameProviderProps) => {
 	// this state will be shared with all components 
 
 	const [saveGame, setSaveGame] = useState<SaveGameType>(initialState);

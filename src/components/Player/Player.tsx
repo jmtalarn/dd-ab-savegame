@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import react, { useState } from 'react';
+import react, { useState, useMemo } from 'react';
 import { Character, Characters, PlayerStats, Class, PersonalityValues, AttackValues, BackPacks, ObjectLooted } from '../Character/Character.types';
 import { Button, Form, Input, InputNumber, Select, Slider, Radio } from 'antd';
 import CharacterName from '../CharacterName';
@@ -7,11 +7,25 @@ import { enumToOptions } from '../../utils';
 
 type Props = {
   playerStats?: PlayerStats;
+  playerClass: Class;
   onSave?: (values: PlayerStats) => void
 };
 
-const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, onSave }: Props) => {
+const filterAndFormatCharacterClassOptions = (characterClass: Class) => Characters.filter((character: Character) => character.class === characterClass).map((character: Character) => ({
+  value: character.name,
+  label: <CharacterName classType={character.class} text={character.name} />,
+}))
+
+const characterClassOptionsMap = ({
+  [Class.Fighter]: filterAndFormatCharacterClassOptions(Class.Fighter),
+  [Class.Sorcerer]: filterAndFormatCharacterClassOptions(Class.Sorcerer),
+  [Class.Rogue]: filterAndFormatCharacterClassOptions(Class.Rogue),
+  [Class.Bard]: filterAndFormatCharacterClassOptions(Class.Bard),
+});
+
+const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, playerClass, onSave }: Props) => {
   const [form] = Form.useForm();
+  console.log({ playerClass })
 
   const charactersMap = new Map(Characters.map((character: Character) => ([character.name, character])));
   const backpacksMap = new Map(BackPacks.map((item: BackpackType) => ([item.backpack, item])));
@@ -80,10 +94,7 @@ const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, onSave }: Prop
           filterOption={(input, option) =>
             ((option?.label ?? '') as string).toLowerCase().includes(input.toLowerCase())
           }
-          options={Characters.map((character: Character) => ({
-            value: character.name,
-            label: <CharacterName classType={character.class} text={character.name} />,
-          }))}
+          options={characterClassOptionsMap[playerClass]}
         />
       </Form.Item>
       <Form.Item name="life" label="Life">
@@ -144,15 +155,3 @@ const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, onSave }: Prop
 };
 
 export default Player;
-{
-  /* character
-    level: 1,
-    coins: 5,
-    life: 8,
-    position: { dungeon: Dungeon.Neverwinter, position: 3 },
-    objects: [],
-    identifier: 'Welcome player one!',
-    personality: 'El rebelde',
-    attacks: 'Desastre natural',
-    backpack */
-}
