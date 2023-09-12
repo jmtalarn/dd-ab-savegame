@@ -1,0 +1,26 @@
+button {
+  min-width: 18rem;
+}
+.save-button {
+  margin-bottom: 1rem;
+  display: flex;
+
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.savegame-list{
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.savegame {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 22rem;
+}
+
