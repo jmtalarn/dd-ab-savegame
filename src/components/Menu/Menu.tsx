@@ -130,6 +130,7 @@ type MenuAntdProps = {
 }
 
 const Menu = ({ onClick }: MenuAntdProps) => <MenuAntd
+  className={styles.menu}
   onClick={onClick}
   mode="inline"
   items={items}

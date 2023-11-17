@@ -32,7 +32,6 @@ type SaveGameProviderProps = {
 }
 export const SaveGameProvider = ({ initialState = {}, children }: SaveGameProviderProps) => {
 	// this state will be shared with all components 
-
 	const [saveGame, setSaveGame] = useState<SaveGameType>(initialState);
 
 	const setBoss = ({ boss }: { boss: Boss }) => {

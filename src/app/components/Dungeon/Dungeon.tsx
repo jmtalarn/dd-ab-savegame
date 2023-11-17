@@ -17,6 +17,7 @@ const DungeonWithContext = ({ index = 0 }: Props) => {
 		dungeon={dungeon}
 		blocked={index === 3}
 		onSave={({ dungeon }) => { setDungeon({ dungeon, index }) }}
+		dungeonToIgnore={dungeons[3]}
 	/>
 }
 

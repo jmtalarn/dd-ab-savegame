@@ -7,27 +7,32 @@ import styles from './SaveGame.module.css';
 //import { ReactComponent as TitleIcon } from "../../assets/icon.svg"
 
 
+type SaveGameProps = {
+  onSaveGame: (key: string) => void;
+  onDeleteGame: (key: string) => void;
+  onSetCurrentSaveGame: (key: string) => void;
+  saveGames: string[];
+}
+const SaveGame = ({ onDeleteGame, onSetCurrentSaveGame, onSaveGame, saveGames }: SaveGameProps) => {
+  console.log("saveGames in Component", saveGames);
+  //const [savegames, setSaveGame] = useState<string[]>([...saveGames]);
 
-const SaveGame = () => {
-  const [savegames, setSaveGame] = useState<string[]>([]);
   const [open, setOpen] = useState<boolean>(false);
 
   const today = new Date();
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const saveGameKey = new Intl.DateTimeFormat(undefined, options).format(today);
 
-  const countSaveGames = savegames.filter(savegame => savegame.startsWith(saveGameKey)).length;
+  const countSaveGames = saveGames.filter(savegame => savegame.startsWith(saveGameKey)).length;
 
 
   const createSaveGame = () => {
     const key = `${saveGameKey}${countSaveGames ? ` ${countSaveGames + 1}` : ''}`;
-    //if (!savegames.includes(saveGameKey)) {
-    setSaveGame([key, ...savegames])
-    //}
+    onSaveGame?.(key);
   }
 
   const deleteSaveGame = (key) => {
-    setSaveGame(savegames.filter(savegame => savegame !== key))
+    onDeleteGame?.(key);
   };
   const handleOpenChange = (newOpen: boolean) => {
     if (!newOpen) {
@@ -65,9 +70,9 @@ const SaveGame = () => {
       </Button>
     </Popconfirm>
 
-    {savegames.map(savegame => (
-      <div className={styles.savegame}>
-        <Button key={savegame}>{savegame}</Button>
+    {saveGames.map(savegame => (
+      <div key={savegame} className={styles.savegame}>
+        <Button onClick={() => onSetCurrentSaveGame?.(savegame)}>{savegame}</Button>
         <Popconfirm title="Do you want to delete this savegame?"
           onConfirm={() => deleteSaveGame(savegame)}
           onCancel={() => { }}

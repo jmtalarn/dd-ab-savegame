@@ -1,9 +1,10 @@
 export const capitalize = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 
 
-export const enumToOptions = (e) =>
+export const enumToOptions = (e, keyToIgnore) =>
 	Object.entries(e)
 		.filter(([key, _]) => isNaN(Number(key)))
+		.filter(([key, _]) => key !== keyToIgnore)
 		.map(([key, value]) => (isNaN(Number(value))) ? ({ value: key, label: value }) : ({ value: key, label: key }));
 
 

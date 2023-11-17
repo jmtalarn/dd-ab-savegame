@@ -12,7 +12,7 @@ type Props = {
 };
 
 const Dungeon = ({ dungeon,
-  onSave, blocked = false
+  onSave, blocked = false, dungeonToIgnore
 }: Props) => {
 
   const [form] = Form.useForm();
@@ -37,7 +37,7 @@ const Dungeon = ({ dungeon,
       <Form.Item name="dungeon" label="Dungeon">
         <Select
           placeholder="Select a dungeon"
-          options={enumToOptions(Dungeons)} />
+          options={enumToOptions(Dungeons, dungeonToIgnore)} />
       </Form.Item>
       {!blocked && <Form.Item >
         <Button type="primary" htmlType="submit" block>

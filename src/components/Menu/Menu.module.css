@@ -8,3 +8,6 @@ svg {
   --fa-primary-opacity: 1 !important;
   --fa-secondary-opacity: 1 !important;
 }
+.menu{
+  background: url("./wood-texture.jpg") no-repeat left top cover;
+}

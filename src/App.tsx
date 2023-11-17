@@ -1,36 +1,45 @@
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faReact } from '@fortawesome/free-brands-svg-icons';
-import { Button } from 'antd';
+import { useContext } from 'react';
 
+// import { Button } from 'antd';
+
+import Title from './components/Title'
+import SaveGame from './app/components/SaveGame';
+import MenuDrawer from './app/components/MenuDrawer';
+import Drawer from './components/Drawer'
+import { DataProvider, DataContext } from "./store/DataProvider"
+import { SaveGameProvider } from "./store/SaveGameProvider"
 import 'antd/dist/reset.css';
 import './App.css';
 
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faReact } from '@fortawesome/free-brands-svg-icons';
+// <a href="https://reactjs.org" target="_blank">
+//   <FontAwesomeIcon icon={faReact} size="8x" />
+// </a>
+
 function App() {
-  const [count, setCount] = useState(0);
+
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/mask-icon.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <FontAwesomeIcon icon={faReact} size="8x" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button type="primary" onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </div>
+    <DataProvider>
+      <InnerApp />
+    </DataProvider>
   );
+}
+
+const InnerApp = () => {
+  const { currentSaveGame, setCurrentSaveGame } = useContext(DataContext);
+  const savegame = currentSaveGame?.savegame ?? { dungeons: [] };
+
+  const onClose = () => setCurrentSaveGame(null)
+
+  return (<SaveGameProvider initialState={savegame}>
+    <div className="App">
+      <Title />
+      <SaveGame />
+      {currentSaveGame && <Drawer open={!!currentSaveGame} onClose={onClose} title="Update your data"><MenuDrawer /></Drawer>}
+    </div >
+  </SaveGameProvider>)
 }
 
 export default App;
