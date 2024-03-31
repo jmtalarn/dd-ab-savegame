@@ -1,11 +1,11 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Menu from './Menu';
+import Menu from "./Menu";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/Menu',
+  title: "Components/Menu",
   component: Menu,
   // // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   // argTypes: {

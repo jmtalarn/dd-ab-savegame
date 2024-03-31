@@ -1,11 +1,11 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Player from './Player';
+import Player from "./Player";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/Player',
+  title: "Components/Player",
   component: Player,
   // // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   // argTypes: {

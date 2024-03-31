@@ -1,18 +1,17 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Dungeon from './Dungeon';
+import Dungeon from "./Dungeon";
 
 export default {
-  title: 'Components/Dungeon',
+  title: "Components/Dungeon",
   component: Dungeon,
-
 } as ComponentMeta<typeof Dungeon>;
 
-
-const Template: ComponentStory<typeof Dungeon> = (args) => <Dungeon {...args} />;
+const Template: ComponentStory<typeof Dungeon> = (args) => (
+  <Dungeon {...args} />
+);
 
 export const Default = Template.bind({});
 
 Default.args = {};
-

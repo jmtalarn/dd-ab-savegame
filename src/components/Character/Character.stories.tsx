@@ -1,19 +1,29 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Player from './Character';
-import { Class, Dungeon, Race, Sex, Characters, Character } from './Character.types';
+import Player from "./Character";
+import {
+  Class,
+  Dungeon,
+  Race,
+  Sex,
+  Characters,
+  Character,
+} from "./Character.types";
 
 export default {
-  title: 'Components/Character',
+  title: "Components/Character",
   component: Player,
   argTypes: {
     character: {
       options: Characters.map((character) => character.name),
-      mapping: Characters.reduce((acc: Record<string, Character>, curr: Character): object => {
-        acc[curr.name] = curr;
-        return acc;
-      }, {}),
+      mapping: Characters.reduce(
+        (acc: Record<string, Character>, curr: Character): object => {
+          acc[curr.name] = curr;
+          return acc;
+        },
+        {},
+      ),
     },
   },
 } as ComponentMeta<typeof Player>;
