@@ -1,7 +1,6 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { SaveGameType } from './SaveGameProvider';
-
-
+import { setInLocalStorage, getFromLocalStorage } from './LocalStoreManager';
 
 
 
@@ -18,7 +17,12 @@ type DataProviderProps = {
 export const DataProvider = ({ children }: DataProviderProps) => {
 	// this state will be shared with all components 
 
-	const [{ currentSaveGame, saveGames = new Map() }, setData] = useState<DataContextType>({});
+	const [data, setData] = useState<DataContextType>(getFromLocalStorage);
+	const { currentSaveGame, saveGames = new Map() } = data;
+
+	useEffect(() => {
+		setInLocalStorage(data);
+	}, [data]);
 
 	const setCurrentSaveGame = (saveGame: { key: string, savegame: SaveGameType }) => {
 		setData({ currentSaveGame: saveGame, saveGames });
