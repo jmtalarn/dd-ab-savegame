@@ -7,9 +7,12 @@ import { setInLocalStorage, getFromLocalStorage } from './LocalStoreManager';
 export type DataContextType = {
 	currentSaveGame?: { key: string, savegame: SaveGameType },
 	saveGames?: Map<string, SaveGameType>,
+	setCurrentSaveGame?: (saveGame: { key: string; savegame: SaveGameType; } | undefined) => void,
+	setNewSaveGame?: (newSaveGame: { key: string; savegame: SaveGameType; }) => void,
+	deleteSaveGame?: (keyToDelete: string) => void
 }
 
-export const DataContext = createContext<DataContextType>();
+export const DataContext = createContext<DataContextType>({});
 
 type DataProviderProps = {
 	children?: React.ReactNode
@@ -24,7 +27,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 		setInLocalStorage(data);
 	}, [data]);
 
-	const setCurrentSaveGame = (saveGame: { key: string, savegame: SaveGameType }) => {
+	const setCurrentSaveGame = (saveGame: { key: string, savegame: SaveGameType } | undefined) => {
 		setData({ currentSaveGame: saveGame, saveGames });
 	}
 

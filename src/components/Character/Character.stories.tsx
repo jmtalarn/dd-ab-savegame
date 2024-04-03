@@ -1,17 +1,12 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Player from "./Character";
 import {
-  Class,
-  Dungeon,
-  Race,
-  Sex,
   Characters,
   Character,
 } from "./Character.types";
 
-export default {
+const meta = {
   title: "Components/Character",
   component: Player,
   argTypes: {
@@ -26,12 +21,15 @@ export default {
       ),
     },
   },
-} as ComponentMeta<typeof Player>;
+} satisfies Meta<typeof Player>;
 
-const Template: ComponentStory<typeof Player> = (args) => <Player {...args} />; //{...args} />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
 
-Default.args = {
-  character: Characters[0],
+export const Default: Story = {
+  args: {
+    character: Characters[0],
+  }
 };
+

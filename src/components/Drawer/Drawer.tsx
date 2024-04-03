@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Layout, Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import cx from 'classnames';
@@ -9,7 +9,7 @@ const { Header, Content } = Layout;
 
 type Props = {
   children?: React.ReactNode;
-  title: string;
+  title: string | JSX.Element | null;
   open?: boolean;
   onClose?: () => void
 };

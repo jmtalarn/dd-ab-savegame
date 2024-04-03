@@ -1,10 +1,9 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
 import CharacterName from "./CharacterName";
 import { Class } from "../Character/Character.types";
 
-export default {
+const meta = {
   title: "Components/CharacterName",
   component: CharacterName,
   argTypes: {
@@ -13,15 +12,17 @@ export default {
       mapping: Class,
       control: { type: "select" },
     },
-  },
-} as ComponentMeta<typeof CharacterName>;
+  }
+} satisfies Meta<typeof CharacterName>;
 
-const Template: ComponentStory<typeof CharacterName> = (args) => (
-  <CharacterName {...args} />
-); //{...args} />;
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof meta>;
 
-Default.args = {
-  text: "The Ultimate Warrior",
+
+export const Default: Story = {
+  args: {
+    classType: Class.Bard,
+    text: "The Ultimate Warrior",
+  }
 };

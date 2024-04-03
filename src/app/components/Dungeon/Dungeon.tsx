@@ -12,12 +12,12 @@ type Props = {
 const DungeonWithContext = ({ index = 0 }: Props) => {
 	const { saveGame, setDungeon } = useContext(SaveGameContext);
 	const { dungeons } = saveGame;
-	const dungeon = dungeons[index] as Dungeons
+	const dungeon = dungeons ? dungeons[index] as Dungeons : Dungeons.Gauntlgrym;
 	return <Dungeon
 		dungeon={dungeon}
 		blocked={index === 3}
-		onSave={({ dungeon }) => { setDungeon({ dungeon, index }) }}
-		dungeonToIgnore={dungeons[3]}
+		onSave={(dungeon) => { setDungeon({ dungeon, index: index as (0 | 1 | 2) }) }}
+		dungeonToIgnore={dungeons ? dungeons[3] : undefined}
 	/>
 }
 

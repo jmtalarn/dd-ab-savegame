@@ -1,4 +1,3 @@
-import react from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAxeBattle, faHatWizard, faDagger, faBowArrow } from '@fortawesome/pro-duotone-svg-icons';
 import cx from 'classnames';

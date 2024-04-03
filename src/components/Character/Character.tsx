@@ -1,22 +1,22 @@
-import react from 'react';
-import { Input, InputNumber, Form, Card } from 'antd';
-import cx from 'classnames';
+
+import { Card } from 'antd';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faVenus, faMars } from '@fortawesome/pro-solid-svg-icons';
 import styles from './Character.module.css';
 import '../../styles/generic.module.css';
-import { Character, PlayerStats, Sex } from './Character.types';
+import { Character, Sex } from './Character.types';
 import CharacterName from '../CharacterName';
 import { capitalize } from '../../utils';
 
 type Props = {
-  playerStats: PlayerStats;
+  //playerStats: PlayerStats;
   character: Character;
 };
-const labelCol = { span: 3, offset: 0 };
+// const labelCol = { span: 3, offset: 0 };
 
-const Player = ({ playerStats, character }: Props) => {
+const Player = ({ character }: Props) => {
   return (
     <Card title={<CharacterName classType={character.class} text={character.name} />}>
       <div className={styles['card-content']}>

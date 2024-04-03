@@ -1,18 +1,19 @@
 
 import { DataContextType } from "./DataProvider"
+import { SaveGameType } from "./SaveGameProvider";
 
 const LS_KEY = "DD-AB_SAVEGAME";
 
-export const setInLocalStorage = ({ currentSavegame, saveGames }): DataContextType => {
-	console.log({ currentSavegame, saveGames })
+export const setInLocalStorage = ({ currentSaveGame, saveGames }: DataContextType) => {
+	console.log({ currentSaveGame, saveGames })
 	console.log(JSON.stringify({
-		currentSavegame,
-		saveGames: [...saveGames.entries()]
+		currentSaveGame,
+		saveGames: saveGames ? [...saveGames.entries()] : []
 	}))
 	window.localStorage.setItem(LS_KEY,
 		JSON.stringify({
-			currentSavegame,
-			saveGames: [...saveGames.entries()]
+			currentSaveGame,
+			saveGames: saveGames ? [...saveGames.entries()] : []
 		}));
 }
 
@@ -23,7 +24,13 @@ export const getFromLocalStorage = () => {
 		return (
 			{
 				currentSavegame,
-				saveGames: reduceSaveGames(saveGames)
+				saveGames: saveGames.reduce(
+					(acc: Map<string, SaveGameType>, curr: (string | SaveGameType)[]) => {
+						acc.set(curr[0] as string, curr[1] as SaveGameType);
+						return acc;
+					}
+					, new Map()
+				)
 			})
 	} else {
 		return { saveGames: new Map() }
@@ -31,4 +38,3 @@ export const getFromLocalStorage = () => {
 
 }
 
-const reduceSaveGames = (saveGames) => saveGames.reduce((acc, curr) => { acc.set(curr[0], curr[1]); return acc; }, new Map())

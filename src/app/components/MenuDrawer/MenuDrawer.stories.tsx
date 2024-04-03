@@ -1,19 +1,22 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta } from '@storybook/react';
 import { SaveGameProvider } from "../../../store/SaveGameProvider";
 import MenuDrawer from "./MenuDrawer";
 
-export default {
+const meta = {
   title: "App/MenuDrawer",
   component: MenuDrawer,
-} as ComponentMeta<typeof MenuDrawer>;
+  decorators: [(story) => <SaveGameProvider initialState={{ dungeons: [] }}>{story()}</SaveGameProvider>]
+} satisfies Meta<typeof MenuDrawer>;
+export default meta;
+export const Default = {};
 
-const Template: ComponentStory<typeof MenuDrawer> = (args) => (
-  <SaveGameProvider initialState={{ dungeons: [] }}>
-    <MenuDrawer {...args} />
-  </SaveGameProvider>
-);
+export const Error = {};
+// const Template: StoryObj<typeof meta> = (args) => (
+//   <SaveGameProvider initialState={{ dungeons: [] }}>
+//     <MenuDrawer {...args} />
+//   </SaveGameProvider>
+// );
 
-export const Default = Template.bind({});
+// export const Default = Template.bind({});
 
-Default.args = {};
+// Default.args = {};

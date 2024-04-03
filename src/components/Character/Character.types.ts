@@ -1,3 +1,5 @@
+import { Dungeon } from "../Dungeon/Dungeon.types"
+
 export enum Race {
   Elf = 'elf',
   Dwarf = 'dwarf',
@@ -15,10 +17,10 @@ export enum Sex {
   Female = 'female',
 }
 
-const PersonalityBard = ['El rebelde', 'El erudito', 'El buscador', 'El pacificador'] as const;
-const PersonalityFighter = ['El genio', 'El apostador', 'El esbirro', 'El manitas'] as const;
-const PersonalitySorcerer = ['El sanador', 'El tornado', 'El sabio', 'El embaucador'] as const;
-const PersonalityRogue = ['El campeón', 'El forajido', 'El vagabundo', 'El bandido'] as const;
+const PersonalityBard = ['El rebelde', 'El erudito', 'El buscador', 'El pacificador'];
+const PersonalityFighter = ['El genio', 'El apostador', 'El esbirro', 'El manitas'];
+const PersonalitySorcerer = ['El sanador', 'El tornado', 'El sabio', 'El embaucador'];
+const PersonalityRogue = ['El campeón', 'El forajido', 'El vagabundo', 'El bandido'];
 
 export const PersonalityValues = {
   PersonalityBard,
@@ -113,6 +115,18 @@ export type Character = {
   name: string;
   sex: Sex;
 };
+
+export enum BackPacksNames {
+  Artist = 'Mochila de artista',
+  Thief = 'Mochila de ladrón',
+  Healer = 'Mochila de Sanador',
+  Hunter = 'Mochila de cazador',
+  Trader = 'Mochila de mercader',
+  Erudite = 'Mochila de erudito',
+  Explorer = 'Mochila de explorador',
+  Crawler = 'Mochila de explorador de mazmorras',
+}
+
 export const BackPacks: BackPackType[] = [
   {
     backpack: BackPacksNames.Artist,
@@ -142,16 +156,7 @@ export const BackPacks: BackPackType[] = [
   }
 
 ]
-export enum BackPacksNames {
-  Artist = 'Mochila de artista',
-  Thief = 'Mochila de ladrón',
-  Healer = 'Mochila de Sanador',
-  Hunter = 'Mochila de cazador',
-  Trader = 'Mochila de mercader',
-  Erudite = 'Mochila de erudito',
-  Explorer = 'Mochila de explorador',
-  Crawler = 'Mochila de explorador de mazmorras',
-}
+
 
 export type BackPackType =
   | {

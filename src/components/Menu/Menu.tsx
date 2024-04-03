@@ -1,4 +1,3 @@
-import react from 'react';
 import type { MenuProps } from 'antd';
 import { Menu as MenuAntd } from 'antd';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
@@ -14,23 +13,11 @@ import {
   faCircle3,
 } from '@fortawesome/pro-duotone-svg-icons';
 import styles from './Menu.module.css';
-
+import { MenuKeys } from './MenuKeys';
 import '../../styles/generic.module.css';
 import { Class } from '../Character/Character.types';
 
-export enum MenuKeys {
-  FinalBoss = 'final boss',
-  Dungeons = 'dungeons',
-  Dungeon1 = 'dungeon 1',
-  Dungeon2 = 'dungeon 2',
-  Dungeon3 = 'dungeon 3',
-  Dungeon4 = 'dungeon 4',
-  Heroes = 'heroes',
-  Fighter = 'fighter',
-  Sorcerer = 'sorcerer',
-  Rogue = 'rogue',
-  Bard = 'bard'
-}
+
 
 const items: ItemType[] = [
   {

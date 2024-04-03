@@ -1,10 +1,9 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta } from '@storybook/react';
 import { SaveGameProvider } from "../../../store/SaveGameProvider";
 import { Class } from "../../../components/Character/Character.types";
 import Player from "./Player";
 
-export default {
+const meta = {
   title: "App/Player",
   component: Player,
   argTypes: {
@@ -19,14 +18,20 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Player>;
+  decorators: [(story) => <SaveGameProvider initialState={{}}>{story()}</SaveGameProvider>]
+} satisfies Meta<typeof Player>;
+export default meta;
 
-const Template: ComponentStory<typeof Player> = (args) => (
-  <SaveGameProvider initialState={{}}>
-    <Player {...args} />
-  </SaveGameProvider>
-);
+export const Default = {};
 
-export const Default = Template.bind({});
+export const Error = {};
 
-Default.args = {};
+// const Template: StoryObj<typeof meta> = (args) => (
+//   <SaveGameProvider initialState={{}}>
+//     <Player {...args} />
+//   </SaveGameProvider>
+// );
+
+// export const Default = Template.bind({});
+
+// Default.args = {};

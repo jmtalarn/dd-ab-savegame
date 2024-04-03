@@ -6,7 +6,7 @@ import Boss from '../../../components/Boss'
 const BossWithContext = () => {
 	const { saveGame, setBoss } = useContext(SaveGameContext);
 	const { boss } = saveGame;
-	return <Boss boss={boss} onSave={setBoss} />
+	return <Boss boss={boss} onSave={boss => setBoss({ boss })} />
 }
 
 export default BossWithContext;

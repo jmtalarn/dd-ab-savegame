@@ -1,6 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import react, { useState, useMemo } from 'react';
-import { Character, Characters, PlayerStats, Class, PersonalityValues, AttackValues, BackPacks, ObjectLooted } from '../Character/Character.types';
+import { useState } from 'react';
+import { Character, Characters, PlayerStats, Class, PersonalityValues, PersonalityType, AttackType, AttackValues, BackPacks, BackPackType, BackPacksNames, ObjectLooted } from '../Character/Character.types';
 import { Button, Form, Input, InputNumber, Select, Slider, Radio } from 'antd';
 import CharacterName from '../CharacterName';
 import { enumToOptions } from '../../utils';
@@ -27,15 +26,17 @@ const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, playerClass, o
   const [form] = Form.useForm();
 
   const charactersMap = new Map(Characters.map((character: Character) => ([character.name, character])));
-  const backpacksMap = new Map(BackPacks.map((item: BackpackType) => ([item.backpack, item])));
+  const backpacksMap = new Map(BackPacks.map((item: BackPackType) => ([item.backpack, item])));
 
-  const [character, setCharacter] = useState<Character>();
-  const [characterPersonalities, setCharacterPersonalities] = useState<PersonalityType>([]);
-  const [characterAttacks, setCharacterAttacks] = useState<AttackType>([]);
-  const onBackpackChange = (selectedBackpackName) => {
+  const [, setCharacter] = useState<Character>();
+  const [characterPersonalities, setCharacterPersonalities] = useState<PersonalityType[]>([]);
+  const [characterAttacks, setCharacterAttacks] = useState<AttackType[]>([]);
+  const onBackpackChange = (selectedBackpackName: BackPacksNames) => {
     const selectedBackPack = backpacksMap.get(selectedBackpackName);
     setBackpack(selectedBackPack);
-    form.setFieldValue(["backpack", "items"], selectedBackPack.items);
+    if (selectedBackPack) {
+      form.setFieldValue(["backpack", "items"], selectedBackPack.items);
+    }
   };
   const [backpack, setBackpack] = useState<BackPackType>();
   const [loot, setLoot] = useState<ObjectLooted[]>([]);
@@ -43,24 +44,27 @@ const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, playerClass, o
   const onCharacterChange = (characterName: string) => {
     const selectedCharacter = charactersMap.get(characterName);
     setCharacter(selectedCharacter);
-    switch (selectedCharacter.class) {
-      case Class.Bard:
-        setCharacterPersonalities(PersonalityValues.PersonalityBard);
-        setCharacterAttacks(AttackValues.AttacksBard);
-        break;
-      case Class.Fighter:
-        setCharacterPersonalities(PersonalityValues.PersonalityFighter);
-        setCharacterAttacks(AttackValues.AttacksFighter);
-        break;
-      case Class.Sorcerer:
-        setCharacterPersonalities(PersonalityValues.PersonalitySorcerer);
-        setCharacterAttacks(AttackValues.AttacksSorcerer);
-        break;
-      case Class.Rogue:
-        setCharacterPersonalities(PersonalityValues.PersonalityRogue);
-        setCharacterAttacks(AttackValues.AttacksRogue);
-        break;
+    if (selectedCharacter) {
+      switch (selectedCharacter.class) {
+        case Class.Bard:
+          setCharacterPersonalities(PersonalityValues.PersonalityBard);
+          setCharacterAttacks(AttackValues.AttacksBard);
+          break;
+        case Class.Fighter:
+          setCharacterPersonalities(PersonalityValues.PersonalityFighter);
+          setCharacterAttacks(AttackValues.AttacksFighter);
+          break;
+        case Class.Sorcerer:
+          setCharacterPersonalities(PersonalityValues.PersonalitySorcerer);
+          setCharacterAttacks(AttackValues.AttacksSorcerer);
+          break;
+        case Class.Rogue:
+          setCharacterPersonalities(PersonalityValues.PersonalityRogue);
+          setCharacterAttacks(AttackValues.AttacksRogue);
+          break;
+      }
     }
+
   }
 
   const layout = {
@@ -117,12 +121,12 @@ const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, playerClass, o
       <Form.Item name="personality" label="Personality">
         <Select
           placeholder="Select a personality"
-          options={characterPersonalities.map(value => ({ value, label: value }))} />
+          options={characterPersonalities.map((value: string) => ({ value, label: value }))} />
       </Form.Item>
       <Form.Item name="attacks" label="Attacks">
         <Select
           placeholder="Select an attack"
-          options={characterAttacks.map(value => ({ value, label: value }))} />
+          options={characterAttacks.map((value: string) => ({ value, label: value }))} />
       </Form.Item>
       <Form.Item label="BackPack">
         <Form.Item name={['backpack', 'backpack']}>

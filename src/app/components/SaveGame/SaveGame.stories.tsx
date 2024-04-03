@@ -1,20 +1,14 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-
+import type { Meta } from '@storybook/react';
 import { DataProvider } from "../../../store/DataProvider";
 import SaveGame from "./SaveGame";
 
-export default {
+const meta = {
   title: "App/SaveGame",
   component: SaveGame,
-} as ComponentMeta<typeof SaveGame>;
+  decorators: [(story) => <DataProvider>{story()}</DataProvider>]
+} satisfies Meta<typeof SaveGame>;
+export default meta;
 
-const Template: ComponentStory<typeof SaveGame> = (args) => (
-  <DataProvider>
-    <SaveGame {...args} />
-  </DataProvider>
-);
+export const Default = {};
 
-export const Default = Template.bind({});
-
-Default.args = {};
+export const Error = {};

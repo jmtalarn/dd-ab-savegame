@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import react, { useState, useMemo, useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 import { Dungeon as Dungeons } from './Dungeon.types';
 import { Form, Select, Button } from 'antd';
 import { enumToOptions, enumKeyForValue } from '../../utils';
@@ -8,6 +7,7 @@ import { enumToOptions, enumKeyForValue } from '../../utils';
 type Props = {
   dungeon?: Dungeons;
   blocked?: boolean;
+  dungeonToIgnore?: Dungeons;
   onSave?: (values: Dungeons) => void
 };
 
@@ -21,7 +21,7 @@ const Dungeon = ({ dungeon,
     onSave?.(values);
   };
 
-  const initialValues = useMemo(() => ({ dungeon: enumKeyForValue(dungeon, Dungeons) }), [dungeon]);
+  const initialValues = useMemo(() => ({ dungeon: enumKeyForValue(dungeon as string, Dungeons) }), [dungeon]);
 
   useEffect(() => {
     form.setFieldsValue(initialValues)

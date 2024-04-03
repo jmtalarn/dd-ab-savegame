@@ -1,8 +1,7 @@
 import { useContext } from 'react';
 import { SaveGameContext } from '../../../store/SaveGameProvider';
 import Player from '../../../components/Player'
-import { Class } from '../../../components/Character/Character.types';
-
+import { Class, Characters } from '../../../components/Character/Character.types';
 
 
 
@@ -15,8 +14,8 @@ const PlayerWithContext = ({ playerClass = Class.Fighter }: Props) => {
 	const player = players?.[playerClass];
 	return <Player
 		playerClass={playerClass}
-		playerStats={player}
-		onSave={(values) => setCharacter({ character: values, index: playerClass })}
+		playerStats={{ character: player }}
+		onSave={({ character = Characters[0] }) => setCharacter({ character, index: playerClass })}
 	/>
 }
 

@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import react, { useState } from 'react';
+import { useState } from 'react';
 import { Boss as BossEnum, BossDungeonMap } from './Boss.types';
 import { Form, Select, Button } from 'antd';
 import { enumToOptions } from '../../utils';
@@ -27,7 +26,7 @@ const Boss = ({ boss, onSave
     >
       <Form.Item name="boss" label="Boss">
         <Select
-          onChange={(value) => { setBossSelected(BossEnum[value]) }}
+          onChange={(value: string) => { setBossSelected(value as BossEnum) }}
           placeholder="Select a final boss"
           options={enumToOptions(BossEnum)} />
       </Form.Item>

@@ -1,47 +1,15 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Player from "./Player";
+import { Class } from "../../components/Character/Character.types";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const meta = {
   title: "Components/Player",
   component: Player,
-  // // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  // argTypes: {
-  //   defaultStacked: { control: 'boolean' },
-  // },
-} as ComponentMeta<typeof Player>;
+} satisfies Meta<typeof Player>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Player> = (args) => <Player {...args} />; //{...args} />;
+export default meta;
 
-export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
-  // label: 'Button',
-};
+type Story = StoryObj<typeof meta>;
 
-// export const Primary = Template.bind({});
-// // More on args: https://storybook.js.org/docs/react/writing-stories/args
-// Primary.args = {
-//   primary: true,
-//   label: 'Button',
-// };
-
-// export const Secondary = Template.bind({});
-// Secondary.args = {
-//   label: 'Button',
-// };
-
-// export const Large = Template.bind({});
-// Large.args = {
-//   size: 'large',
-//   label: 'Button',
-// };
-
-// export const Small = Template.bind({});
-// Small.args = {
-//   size: 'small',
-//   label: 'Button',
-// };
+export const Default: Story = { args: { playerClass: Class.Fighter } };

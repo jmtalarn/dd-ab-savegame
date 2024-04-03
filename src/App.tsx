@@ -31,7 +31,7 @@ const InnerApp = () => {
   const { currentSaveGame, setCurrentSaveGame } = useContext(DataContext);
   const savegame = currentSaveGame?.savegame ?? { dungeons: [] };
 
-  const onClose = () => setCurrentSaveGame(null)
+  const onClose = () => setCurrentSaveGame?.(undefined)
 
   return (<SaveGameProvider initialState={savegame}>
     <div className="App">

@@ -8,12 +8,12 @@ import {
 
 export type SaveGameType = {
 	boss?: Boss;
-	dungeons?: Array<Dungeon>;
+	dungeons?: Array<Dungeon | undefined>;
 	players?: {
-		[Class.Fighter]: Character;
-		[Class.Sorcerer]: Character;
-		[Class.Bard]: Character;
-		[Class.Rogue]: Character;
+		[Class.Fighter]?: Character;
+		[Class.Sorcerer]?: Character;
+		[Class.Bard]?: Character;
+		[Class.Rogue]?: Character;
 	};
 }
 
@@ -24,7 +24,7 @@ export type SaveGameContextType = {
 	setCharacter: ({ character, index }: { character: Character, index: Class }) => void;
 }
 
-export const SaveGameContext = createContext<SaveGameContextType>();
+export const SaveGameContext = createContext<SaveGameContextType>({} as SaveGameContextType);
 
 type SaveGameProviderProps = {
 	initialState?: SaveGameType;
@@ -35,8 +35,8 @@ export const SaveGameProvider = ({ initialState = {}, children }: SaveGameProvid
 	const [saveGame, setSaveGame] = useState<SaveGameType>(initialState);
 
 	const setBoss = ({ boss }: { boss: Boss }) => {
-		const dungeons = [...saveGame.dungeons];
-		dungeons[3] = BossDungeonMap.get(Boss[boss]);
+		const dungeons = [...saveGame.dungeons!];
+		dungeons[3] = BossDungeonMap.get(boss);
 		setSaveGame({
 			...saveGame,
 			boss,
@@ -44,8 +44,8 @@ export const SaveGameProvider = ({ initialState = {}, children }: SaveGameProvid
 		});
 	}
 	const setDungeon = ({ dungeon, index }: { dungeon: Dungeon, index: 0 | 1 | 2 }) => {
-		const dungeons = [...saveGame.dungeons];
-		dungeons[index] = Dungeon[dungeon];
+		const dungeons = [...saveGame.dungeons!];
+		dungeons[index] = dungeon;
 		setSaveGame({
 			...saveGame,
 			dungeons: [...dungeons]

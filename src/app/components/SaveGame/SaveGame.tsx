@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { DataContext } from '../../../store/DataProvider';
 import SaveGame from '../../../components/SaveGame'
-import { Dungeon as Dungeons } from '../../../components/Dungeon/Dungeon.types'
+import { SaveGameType } from '../../../store/SaveGameProvider';
 
 const SaveGameWithContext = () => {
 	const {
@@ -11,11 +11,12 @@ const SaveGameWithContext = () => {
 		deleteSaveGame } = useContext(DataContext);
 
 	const onSetCurrentSaveGame = (currentKey: string) => {
-		setCurrentSaveGame({ key: currentKey, savegame: saveGames?.get(currentKey) });
+		const emptySaveGame: SaveGameType = {};
+		setCurrentSaveGame?.({ key: currentKey, savegame: saveGames?.get(currentKey) || emptySaveGame });
 	}
 
 	const onSetNewSaveGame = (key: string) => {
-		setNewSaveGame({ key, savegame: { dungeons: [] } })
+		setNewSaveGame?.({ key, savegame: { dungeons: [] } })
 	}
 
 	return <SaveGame

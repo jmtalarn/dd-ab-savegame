@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk, faTrashCan } from '@fortawesome/pro-duotone-svg-icons';
 import { Button, Popconfirm } from 'antd';
@@ -8,9 +8,9 @@ import styles from './SaveGame.module.css';
 
 
 type SaveGameProps = {
-  onSaveGame: (key: string) => void;
-  onDeleteGame: (key: string) => void;
-  onSetCurrentSaveGame: (key: string) => void;
+  onSaveGame?: (key: string) => void;
+  onDeleteGame?: (keyToDelete: string) => void;
+  onSetCurrentSaveGame?: (key: string) => void;
   saveGames: string[];
 }
 const SaveGame = ({ onDeleteGame, onSetCurrentSaveGame, onSaveGame, saveGames }: SaveGameProps) => {
@@ -20,7 +20,7 @@ const SaveGame = ({ onDeleteGame, onSetCurrentSaveGame, onSaveGame, saveGames }:
   const [open, setOpen] = useState<boolean>(false);
 
   const today = new Date();
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const saveGameKey = new Intl.DateTimeFormat(undefined, options).format(today);
 
   const countSaveGames = saveGames.filter(savegame => savegame.startsWith(saveGameKey)).length;
@@ -31,7 +31,7 @@ const SaveGame = ({ onDeleteGame, onSetCurrentSaveGame, onSaveGame, saveGames }:
     onSaveGame?.(key);
   }
 
-  const deleteSaveGame = (key) => {
+  const deleteSaveGame = (key: string) => {
     onDeleteGame?.(key);
   };
   const handleOpenChange = (newOpen: boolean) => {
