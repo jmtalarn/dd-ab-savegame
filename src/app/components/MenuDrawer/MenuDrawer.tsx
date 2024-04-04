@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import Menu from '../../../components/Menu/Menu'
-import { MenuKeys } from '../../../components/Menu/MenuKeys';
+import { MenuKeys, MenuKeysKey } from '../../../components/Menu/MenuKeys';
 import Drawer from '../../../components/Drawer'
 import CharacterName from '../../../components/CharacterName';
 import Boss from '../Boss';
@@ -14,10 +14,9 @@ import { MenuInfo } from 'rc-menu/lib/interface';
 
 
 const getComponentAndTitle = (keys?: MenuKeys[]) => {
-
 	if (!keys || !keys.length) { return ({ title: null, component: null }) }
-	const [kind] = keys.slice(-1);
-
+	const kind = MenuKeysKey.get(keys.slice(-1)[0]);
+	console.log({ kind, keys })
 	switch (kind) {
 		case MenuKeys.FinalBoss:
 			return ({ component: <Boss />, title: "Final Boss" });
@@ -40,7 +39,7 @@ const getComponentAndTitle = (keys?: MenuKeys[]) => {
 const MenuDrawer = () => {
 	const [selectedMenuItem, setSelectedMenuItem] = useState<MenuKeys[]>();
 	const { title, component } = getComponentAndTitle(selectedMenuItem);
-
+	console.log({ title, component })
 	const onClick: MenuProps['onClick'] = ({ keyPath }: MenuInfo) => {
 		setSelectedMenuItem(keyPath as MenuKeys[]);
 	};

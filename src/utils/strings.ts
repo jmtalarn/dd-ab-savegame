@@ -1,16 +1,12 @@
 export const capitalize = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 
 
-export const enumToOptions = (e, dict, keyToIgnore) => {
-	const objects = Object.keys(e)
-		.filter(([key,]) => dict ? !isNaN(Number(key)) : isNaN(Number(key)))
-		.filter(([key,]) => key !== keyToIgnore)
-		.map((key) => dict ? ({ value: key, label: dict.get(Number(key)) }) : ({ value: key, label: key })
-		)
-	console.log(objects)
-	return objects;
+export const enumToOptions = (e, dict, keyToIgnore) => Object.keys(e)
+	.filter(([key,]) => dict ? !isNaN(Number(key)) : isNaN(Number(key)))
+	.filter(([key,]) => key !== keyToIgnore)
+	.map((key) => dict ? ({ value: key, label: dict.get(Number(key)) }) : ({ value: key, label: key })
+	)
 
-}
 
 
 

@@ -36,7 +36,6 @@ const items: MenuProps['items'] = [
       </div>
     ),
     label: 'Dungeons',
-    //type: 'group',
     children: [
       {
         key: MenuKeysLabel.get(MenuKeys.Dungeon1),
@@ -88,7 +87,6 @@ const items: MenuProps['items'] = [
       </div>
     ),
     label: 'Heroes',
-    //type: 'group',
     children: [
       {
         key: MenuKeysLabel.get(MenuKeys.Fighter),
