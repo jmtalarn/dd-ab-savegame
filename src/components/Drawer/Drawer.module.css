@@ -8,14 +8,16 @@
 
   padding: 0;
 }
+
 .drawer-closed {
   animation: 0.5s ease-in 0s slide-out backwards;
 }
+
 .drawer-open {
   animation: 0.5s ease-in 0.2s slide-in forwards;
 }
+
 .layout {
-  background: ivory url("./pergamine-texture.jpg") no-repeat left top cover;
   height: 100%;
   min-width: 100%;
   margin: 0;
@@ -30,9 +32,11 @@
   display: flex;
   align-items: center;
 }
+
 .header button {
   margin: 0 1em 0 0.5em;
 }
+
 .header h2 {
   padding: 0;
   margin: 0;
@@ -47,7 +51,7 @@
 }
 
 @media (max-width: 830px) {
-  .content{
+  .content {
     padding: 0.5em;
   }
 }
@@ -62,6 +66,7 @@
   0% {
     left: 0;
   }
+
   100% {
     left: calc(100vw + 8px);
   }

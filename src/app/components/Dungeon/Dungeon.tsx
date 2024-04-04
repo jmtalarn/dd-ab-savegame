@@ -11,6 +11,7 @@ type Props = {
 }
 const DungeonWithContext = ({ index = 0 }: Props) => {
 	const { saveGame, setDungeon } = useContext(SaveGameContext);
+	console.log({ saveGame })
 	const { dungeons } = saveGame;
 	const dungeon = dungeons ? dungeons[index] as Dungeons : Dungeons.Gauntlgrym;
 	return <Dungeon

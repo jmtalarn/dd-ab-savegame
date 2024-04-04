@@ -10,6 +10,7 @@ type Props = {
 }
 const PlayerWithContext = ({ playerClass = Class.Fighter }: Props) => {
 	const { saveGame, setCharacter } = useContext(SaveGameContext);
+	console.log({ saveGame })
 	const { players } = saveGame;
 	const player = players?.[playerClass];
 	return <Player

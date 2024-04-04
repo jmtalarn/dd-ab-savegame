@@ -37,6 +37,7 @@ export const SaveGameProvider = ({ initialState = {}, children }: SaveGameProvid
 	const setBoss = ({ boss }: { boss: Boss }) => {
 		const dungeons = [...saveGame.dungeons!];
 		dungeons[3] = BossDungeonMap.get(boss);
+		console.log("setBoss", { boss, dungeons });
 		setSaveGame({
 			...saveGame,
 			boss,
@@ -45,6 +46,7 @@ export const SaveGameProvider = ({ initialState = {}, children }: SaveGameProvid
 	}
 	const setDungeon = ({ dungeon, index }: { dungeon: Dungeon, index: 0 | 1 | 2 }) => {
 		const dungeons = [...saveGame.dungeons!];
+		console.log("setDungeon", { dungeon, index });
 		dungeons[index] = dungeon;
 		setSaveGame({
 			...saveGame,
@@ -53,6 +55,7 @@ export const SaveGameProvider = ({ initialState = {}, children }: SaveGameProvid
 	}
 	const setCharacter = ({ character, index }: { character: Character, index: Class }) => {
 		const { players } = saveGame;
+		console.log("setCharacter", { character, index });
 		setSaveGame({
 			...saveGame,
 			players: { ...players, [index]: character }
