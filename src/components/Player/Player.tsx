@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Character, Characters, PlayerStats, Class, PersonalityValues, PersonalityType, AttackType, AttackValues, BackPacks, BackPackType, BackPacksNames, ObjectLooted } from '../Character/Character.types';
+import { Character, Characters, PlayerStats, Class, PersonalityValues, PersonalityType, AttackType, AttackValues, BackPacks, BackPackType, BackPacksNames, BackPacksNamesLabel, ObjectLooted } from '../Character/Character.types';
 import { Button, Form, Input, InputNumber, Select, Slider, Radio } from 'antd';
 import CharacterName from '../CharacterName';
 import { enumToOptions } from '../../utils';
@@ -133,7 +133,7 @@ const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, playerClass, o
           <Select
             onChange={onBackpackChange}
             placeholder="Select a backpack"
-            options={BackPacks.map(item => ({ value: item.backpack, label: item.backpack }))} />
+            options={BackPacks.map(item => ({ value: item.backpack, label: BackPacksNamesLabel.get(Number(item.backpack)) }))} />
         </Form.Item>
         <Form.Item>
           {backpack?.items.join(", ")}

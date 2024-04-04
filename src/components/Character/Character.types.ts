@@ -1,21 +1,41 @@
 import { Dungeon } from "../Dungeon/Dungeon.types"
 
 export enum Race {
-  Elf = 'elf',
-  Dwarf = 'dwarf',
-  Human = 'human',
-  RedDragonBorn = 'dragonborn',
+  Elf,
+  Dwarf,
+  Human,
+  RedDragonBorn,
 }
+
+export const RaceLabel: Map<Race, string> = new Map([
+  [Race.Elf, 'elf'],
+  [Race.Dwarf, 'dwarf'],
+  [Race.Human, 'human'],
+  [Race.RedDragonBorn, 'dragonborn'],
+]);
+
 export enum Class {
-  Bard = 'bard',
-  Fighter = 'fighter',
-  Sorcerer = 'sorcerer',
-  Rogue = 'rogue',
+  Bard,
+  Fighter,
+  Sorcerer,
+  Rogue,
 }
+
+export const ClassLabel: Map<Class, string> = new Map([
+  [Class.Bard, 'bard'],
+  [Class.Fighter, 'fighter'],
+  [Class.Sorcerer, 'sorcerer'],
+  [Class.Rogue, 'rogue']
+]);
+
 export enum Sex {
-  Male = 'male',
-  Female = 'female',
+  Male,
+  Female,
 }
+export const SexLabel: Map<Class, string> = new Map([
+  [Sex.Male, 'male'],
+  [Sex.Female, 'female']
+]);
 
 const PersonalityBard = ['El rebelde', 'El erudito', 'El buscador', 'El pacificador'];
 const PersonalityFighter = ['El genio', 'El apostador', 'El esbirro', 'El manitas'];
@@ -117,15 +137,26 @@ export type Character = {
 };
 
 export enum BackPacksNames {
-  Artist = 'Mochila de artista',
-  Thief = 'Mochila de ladrón',
-  Healer = 'Mochila de Sanador',
-  Hunter = 'Mochila de cazador',
-  Trader = 'Mochila de mercader',
-  Erudite = 'Mochila de erudito',
-  Explorer = 'Mochila de explorador',
-  Crawler = 'Mochila de explorador de mazmorras',
+  Artist,
+  Thief,
+  Healer,
+  Hunter,
+  Trader,
+  Erudite,
+  Explorer,
+  Crawler,
 }
+
+export const BackPacksNamesLabel: Map<BackPacksNames, string> = new Map([
+  [BackPacksNames.Artist, 'Mochila de artista'],
+  [BackPacksNames.Thief, 'Mochila de ladrón'],
+  [BackPacksNames.Healer, 'Mochila de Sanador'],
+  [BackPacksNames.Hunter, 'Mochila de cazador'],
+  [BackPacksNames.Trader, 'Mochila de mercader'],
+  [BackPacksNames.Erudite, 'Mochila de erudito'],
+  [BackPacksNames.Explorer, 'Mochila de explorador'],
+  [BackPacksNames.Crawler, 'Mochila de explorador de mazmorras'],
+])
 
 export const BackPacks: BackPackType[] = [
   {

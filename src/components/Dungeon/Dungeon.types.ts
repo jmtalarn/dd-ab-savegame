@@ -1,6 +1,13 @@
 export enum Dungeon {
-	Gauntlgrym = 'Gauntlgrym',
-	Neverwinter = 'Neverwinter',
-	NeverwinterForest = 'Bosque de Neverwinter',
-	HotenowMount = 'Monte Hotenow',
+	Gauntlgrym,
+	Neverwinter,
+	NeverwinterForest,
+	HotenowMount,
 }
+
+export const DungeonLabel: Map<Dungeon, string> = new Map([
+	[Dungeon.Gauntlgrym, 'Gauntlgrym'],
+	[Dungeon.Neverwinter, 'Neverwinter'],
+	[Dungeon.NeverwinterForest, 'Bosque de Neverwinter'],
+	[Dungeon.HotenowMount, 'Monte Hotenow']
+]);

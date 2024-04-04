@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from 'react';
-import { Dungeon as Dungeons } from './Dungeon.types';
+import { Dungeon as Dungeons, DungeonLabel } from './Dungeon.types';
 import { Form, Select, Button } from 'antd';
 import { enumToOptions, enumKeyForValue } from '../../utils';
 
@@ -37,7 +37,7 @@ const Dungeon = ({ dungeon,
       <Form.Item name="dungeon" label="Dungeon">
         <Select
           placeholder="Select a dungeon"
-          options={enumToOptions(Dungeons, dungeonToIgnore)} />
+          options={enumToOptions(Dungeons, DungeonLabel, dungeonToIgnore)} />
       </Form.Item>
       {!blocked && <Form.Item >
         <Button type="primary" htmlType="submit" block>

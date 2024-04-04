@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Boss as BossEnum, BossDungeonMap } from './Boss.types';
+import { Boss as BossEnum, BossDungeonMap, BossLabel } from './Boss.types';
+import { DungeonLabel } from '../Dungeon/Dungeon.types';
 import { Form, Select, Button } from 'antd';
 import { enumToOptions } from '../../utils';
 
@@ -17,7 +18,7 @@ const Boss = ({ boss, onSave
   const onFinish = (values: BossEnum) => {
     onSave?.(values);
   };
-
+  console.log(BossLabel.entries())
   return (
     <Form
       initialValues={{ boss }}
@@ -28,12 +29,13 @@ const Boss = ({ boss, onSave
         <Select
           onChange={(value: string) => { setBossSelected(value as BossEnum) }}
           placeholder="Select a final boss"
-          options={enumToOptions(BossEnum)}
-          value={bossSelected}
+          options={enumToOptions(BossEnum, BossLabel)}
         />
       </Form.Item>
       <Form.Item label={bossSelected && "Last dungeon"} >
-        {bossSelected && <strong>{BossDungeonMap.get(BossEnum[bossSelected as unknown as keyof typeof BossEnum])}</strong>}
+        {console.log({ bossSelected, BossDungeonMap, bossEnum: BossEnum[Number(bossSelected)] })
+        }
+        {bossSelected && <strong>{DungeonLabel.get(Number(BossDungeonMap.get(Number(bossSelected))))}</strong>}
       </Form.Item>
       <Form.Item >
         <Button type="primary" htmlType="submit" block>

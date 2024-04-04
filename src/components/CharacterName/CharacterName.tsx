@@ -3,7 +3,7 @@ import { faAxeBattle, faHatWizard, faDagger, faBowArrow } from '@fortawesome/pro
 import cx from 'classnames';
 import generic from '../../styles/generic.module.css';
 import styles from './CharacterName.module.css';
-import { Class } from '../Character/Character.types';
+import { Class, ClassLabel } from '../Character/Character.types';
 
 const ClassIconMap = {
   [Class.Bard]: faBowArrow,
@@ -18,7 +18,7 @@ type Props = {
 
 const CharacterName = ({ classType, text }: Props) => {
   return (
-    <div className={cx(generic[classType], styles.label)}>
+    <div className={cx(generic[ClassLabel.get(classType)], styles.label)}>
       <FontAwesomeIcon icon={ClassIconMap[classType]} />
       <span>{text}</span>
     </div>

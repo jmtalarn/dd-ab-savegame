@@ -1,6 +1,5 @@
 import type { MenuProps } from 'antd';
 import { Menu as MenuAntd } from 'antd';
-import { ItemType } from 'antd/es/menu/hooks/useItems';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CharacterName from '../CharacterName';
 import {
@@ -13,15 +12,15 @@ import {
   faCircle3,
 } from '@fortawesome/pro-duotone-svg-icons';
 import styles from './Menu.module.css';
-import { MenuKeys } from './MenuKeys';
+import { MenuKeys, MenuKeysLabel } from './MenuKeys';
 import '../../styles/generic.module.css';
 import { Class } from '../Character/Character.types';
 
 
 
-const items: ItemType[] = [
+const items: MenuProps['items'] = [
   {
-    key: MenuKeys.FinalBoss,
+    key: MenuKeysLabel.get(MenuKeys.FinalBoss),
     icon: (
       <div>
         <FontAwesomeIcon icon={faSkull} />
@@ -30,17 +29,17 @@ const items: ItemType[] = [
     label: 'Final Boss',
   },
   {
-    key: MenuKeys.Dungeons,
+    key: MenuKeysLabel.get(MenuKeys.Dungeons),
     icon: (
       <div>
         <FontAwesomeIcon icon={faRoute} />
       </div>
     ),
     label: 'Dungeons',
-
+    //type: 'group',
     children: [
       {
-        key: MenuKeys.Dungeon1,
+        key: MenuKeysLabel.get(MenuKeys.Dungeon1),
         icon: (
           <div className="fa-layers fa-fw">
             <FontAwesomeIcon icon={faDungeon} />
@@ -50,7 +49,7 @@ const items: ItemType[] = [
         label: 'First dungeon',
       },
       {
-        key: MenuKeys.Dungeon2,
+        key: MenuKeysLabel.get(MenuKeys.Dungeon2),
         icon: (
           <div className="fa-layers fa-fw">
             <FontAwesomeIcon icon={faDungeon} />
@@ -60,7 +59,7 @@ const items: ItemType[] = [
         label: 'Second dungeon',
       },
       {
-        key: MenuKeys.Dungeon3,
+        key: MenuKeysLabel.get(MenuKeys.Dungeon3),
         icon: (
           <div className="fa-layers fa-fw">
             <FontAwesomeIcon icon={faDungeon} />
@@ -70,7 +69,7 @@ const items: ItemType[] = [
         label: 'Third dungeon',
       },
       {
-        key: MenuKeys.Dungeon4,
+        key: MenuKeysLabel.get(MenuKeys.Dungeon4),
         icon: (
           <div className="fa-layers fa-fw">
             <FontAwesomeIcon icon={faDungeon} />
@@ -82,29 +81,29 @@ const items: ItemType[] = [
     ],
   },
   {
-    key: MenuKeys.Heroes,
+    key: MenuKeysLabel.get(MenuKeys.Heroes),
     icon: (
       <div>
         <FontAwesomeIcon icon={faSwords} />
       </div>
     ),
     label: 'Heroes',
-
+    //type: 'group',
     children: [
       {
-        key: MenuKeys.Fighter,
+        key: MenuKeysLabel.get(MenuKeys.Fighter),
         label: <CharacterName classType={Class.Fighter} text="Fighter" />,
       },
       {
-        key: MenuKeys.Sorcerer,
+        key: MenuKeysLabel.get(MenuKeys.Sorcerer),
         label: <CharacterName classType={Class.Sorcerer} text="Sorcerer" />,
       },
       {
-        key: MenuKeys.Bard,
+        key: MenuKeysLabel.get(MenuKeys.Bard),
         label: <CharacterName classType={Class.Bard} text="Bard" />,
       },
       {
-        key: MenuKeys.Rogue,
+        key: MenuKeysLabel.get(MenuKeys.Rogue),
         label: <CharacterName classType={Class.Rogue} text="Rogue" />,
       },
     ],
@@ -116,12 +115,16 @@ type MenuAntdProps = {
   onClick?: MenuProps['onClick'];
 }
 
-const Menu = ({ onClick }: MenuAntdProps) => <MenuAntd
-  className={styles.menu}
-  onClick={onClick}
-  mode="inline"
-  items={items}
-  openKeys={[MenuKeys.Heroes, MenuKeys.Dungeons]}
-/>;
+const Menu = ({ onClick }: MenuAntdProps) => {
+  console.log({ items })
+  return <MenuAntd
+    className={styles.menu}
+    onClick={onClick}
+    mode="inline"
+    items={items}
+    openKeys={[MenuKeysLabel.get(MenuKeys.Heroes), MenuKeysLabel.get(MenuKeys.Dungeons)]}
+  //defaultOpenKeys={[MenuKeys.Heroes, MenuKeys.Dungeons]}
+  />
+};
 
 export default Menu;

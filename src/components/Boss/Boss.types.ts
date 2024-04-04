@@ -1,11 +1,18 @@
 import { Dungeon } from "../Dungeon/Dungeon.types"
 
 export enum Boss {
-	Kraken = 'El kraken',
-	Felbris = 'Felbris, el contemplador', //"El bosque de Neverwinter",
-	Orn = 'Orn, el gigante de fuego',
-	Deathsleep = 'Deathsleep, el dragon verde'
+	Kraken,
+	Felbris,
+	Orn,
+	Deathsleep,
 }
+
+export const BossLabel: Map<Boss, string> = new Map([
+	[Boss.Kraken, 'El kraken'],
+	[Boss.Felbris, 'Felbris, el contemplador'], //"El bosque de Neverwinter",
+	[Boss.Orn, 'Orn, el gigante de fuego'],
+	[Boss.Deathsleep, 'Deathsleep, el dragon verde']
+])
 
 
 
