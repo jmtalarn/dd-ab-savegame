@@ -23,12 +23,11 @@ const InnerApp = () => {
   const { currentSaveGame, setCurrentSaveGame } = useContext(DataContext);
 
   const onClose = () => setCurrentSaveGame?.(undefined)
-  console.log("App currentSaveGame", currentSaveGame)
   return (
     <div className="App">
       <Title />
       <SaveGame />
-      {currentSaveGame && <Drawer open={!!currentSaveGame} onClose={onClose} title="Update your data"><MenuDrawer /></Drawer>}
+      {currentSaveGame && <Drawer open={!!currentSaveGame} onClose={onClose} title="Update your data"><MenuDrawer onCancel={onClose} /></Drawer>}
     </div >
   )
 }

@@ -7,7 +7,7 @@ import CharacterName from '../../../components/CharacterName';
 import Boss from '../Boss';
 import Dungeon from '../Dungeon';
 import Player from '../Player';
-import { Class } from '../../../components/Character/Character.types';
+import { ClassKey } from '../../../components/Character/Character.types';
 import { capitalize, ordinalize } from '../../../utils'
 import type { MenuProps } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
@@ -16,7 +16,7 @@ import { MenuInfo } from 'rc-menu/lib/interface';
 const getComponentAndTitle = (keys?: MenuKeys[]) => {
 	if (!keys || !keys.length) { return ({ title: null, component: null }) }
 	const kind = MenuKeysKey.get(keys.slice(-1)[0]);
-	console.log({ kind, keys })
+
 	switch (kind) {
 		case MenuKeys.FinalBoss:
 			return ({ component: <Boss />, title: "Final Boss" });
@@ -26,9 +26,9 @@ const getComponentAndTitle = (keys?: MenuKeys[]) => {
 			return ({ component: <Dungeon index={(index - 1) as (0 | 1 | 2 | 3)} />, title });
 		}
 		case MenuKeys.Heroes: {
-			const playerClass = keys[0] as unknown as Class;
-			const title = <CharacterName classType={playerClass} text={`${capitalize(playerClass)} character`} />;
-			return ({ component: <Player playerClass={playerClass} />, title });
+			const playerClass = keys[0];
+			const title = <CharacterName classType={ClassKey.get(playerClass)} text={`${capitalize(playerClass)} character`} />;
+			return ({ component: <Player playerClass={ClassKey.get(playerClass)} />, title });
 		}
 		default:
 			return ({ title: null, component: null });

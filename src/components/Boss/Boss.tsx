@@ -14,11 +14,11 @@ const Boss = ({ boss, onSave
 }: Props) => {
   const [form] = Form.useForm();
   const [bossSelected, setBossSelected] = useState<BossEnum>(boss);
-  console.log({ boss, bossSelected })
+
   const onFinish = (values: BossEnum) => {
     onSave?.(values);
   };
-  console.log(BossLabel.entries())
+
   return (
     <Form
       initialValues={{ boss }}
@@ -33,8 +33,6 @@ const Boss = ({ boss, onSave
         />
       </Form.Item>
       <Form.Item label={bossSelected && "Last dungeon"} >
-        {console.log({ bossSelected, BossDungeonMap, bossEnum: BossEnum[Number(bossSelected)] })
-        }
         {bossSelected && <strong>{DungeonLabel.get(Number(BossDungeonMap.get(Number(bossSelected))))}</strong>}
       </Form.Item>
       <Form.Item >

@@ -14,8 +14,6 @@ type SaveGameProps = {
   saveGames: string[];
 }
 const SaveGame = ({ onDeleteGame, onSetCurrentSaveGame, onSaveGame, saveGames }: SaveGameProps) => {
-  console.log("saveGames in Component", saveGames);
-  //const [savegames, setSaveGame] = useState<string[]>([...saveGames]);
 
   const [open, setOpen] = useState<boolean>(false);
 

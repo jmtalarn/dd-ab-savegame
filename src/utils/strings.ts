@@ -3,9 +3,10 @@ export const capitalize = (str: string): string => str.charAt(0).toUpperCase() +
 
 export const enumToOptions = (e, dict, keyToIgnore) => Object.keys(e)
 	.filter(([key,]) => dict ? !isNaN(Number(key)) : isNaN(Number(key)))
-	.filter(([key,]) => key !== keyToIgnore)
+	.filter(([key,]) => key !== keyToIgnore?.toString())
 	.map((key) => dict ? ({ value: key, label: dict.get(Number(key)) }) : ({ value: key, label: key })
 	)
+
 
 
 

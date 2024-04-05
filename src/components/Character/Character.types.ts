@@ -28,6 +28,13 @@ export const ClassLabel: Map<Class, string> = new Map([
   [Class.Rogue, 'rogue']
 ]);
 
+export const ClassKey: Map<string, Class> = new Map([
+  ['bard', Class.Bard],
+  ['fighter', Class.Fighter],
+  ['sorcerer', Class.Sorcerer],
+  ['rogue', Class.Rogue]
+]);
+
 export enum Sex {
   Male,
   Female,
@@ -220,7 +227,7 @@ export type BackPackType =
 
 
 export type DungeonPosition = 1 | 2 | 3 | 4 | 5 | 6;
-export type AttackLevel = 1 | 2;
+export type AttackLevel = "1" | "2";
 export enum ObjectLooted {
   'Lira de pantaoles en llamas',
   'Pseudodragon',

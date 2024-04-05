@@ -114,7 +114,6 @@ type MenuAntdProps = {
 }
 
 const Menu = ({ onClick }: MenuAntdProps) => {
-  console.log({ items })
   return <MenuAntd
     className={styles.menu}
     onClick={onClick}

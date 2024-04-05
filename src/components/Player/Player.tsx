@@ -22,7 +22,7 @@ const characterClassOptionsMap = ({
   [Class.Bard]: filterAndFormatCharacterClassOptions(Class.Bard),
 });
 
-const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, playerClass, onSave }: Props) => {
+const Player = ({ playerStats = { level: "1", life: 10, coins: 0 }, playerClass, onSave }: Props) => {
   const [form] = Form.useForm();
 
   const charactersMap = new Map(Characters.map((character: Character) => ([character.name, character])));
@@ -38,10 +38,14 @@ const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, playerClass, o
       form.setFieldValue(["backpack", "items"], selectedBackPack.items);
     }
   };
-  const [backpack, setBackpack] = useState<BackPackType>();
+
+  const playerStatsBackPack = playerStats?.backpack ? backpacksMap.get(playerStats?.backpack.backpack) : undefined;
+  const [backpack, setBackpack] = useState<BackPackType>(playerStatsBackPack);
+
   const [loot, setLoot] = useState<ObjectLooted[]>([]);
 
   const onCharacterChange = (characterName: string) => {
+
     const selectedCharacter = charactersMap.get(characterName);
     setCharacter(selectedCharacter);
     if (selectedCharacter) {
@@ -69,6 +73,7 @@ const Player = ({ playerStats = { level: 1, life: 10, coins: 0 }, playerClass, o
 
   const layout = {
     labelCol: { span: 4 },
+    layout: "horizontal"
   };
 
 

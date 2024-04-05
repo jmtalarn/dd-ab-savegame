@@ -21,15 +21,15 @@ const Dungeon = ({ dungeon,
     onSave?.(values);
   };
 
-  const initialValues = useMemo(() => ({ dungeon: enumKeyForValue(dungeon as string, Dungeons) }), [dungeon]);
+  // const initialValues = useMemo(() => ({ dungeon: enumKeyForValue(dungeon as string, Dungeons) }), [dungeon]);
 
-  useEffect(() => {
-    form.setFieldsValue(initialValues)
-  }, [form, initialValues]);
+  // useEffect(() => {
+  //   form.setFieldsValue(initialValues)
+  // }, [form, initialValues]);
 
   return (
     <Form
-      initialValues={initialValues}
+      initialValues={{ dungeon }}
       onFinish={onFinish}
       form={form}
       disabled={blocked}

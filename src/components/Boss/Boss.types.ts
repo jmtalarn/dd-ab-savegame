@@ -17,7 +17,7 @@ export const BossLabel: Map<Boss, string> = new Map([
 
 
 export const BossDungeonMap: Map<Boss, Dungeon> = new Map([
-	[Boss.Kraken, Dungeon.Neverwinter],
+	[Boss.Kraken, Dungeon.Gauntlgrym],
 	[Boss.Orn, Dungeon.HotenowMount],
 	[Boss.Deathsleep, Dungeon.NeverwinterForest],
 	[Boss.Felbris, Dungeon.Neverwinter]

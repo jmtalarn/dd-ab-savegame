@@ -14,7 +14,7 @@ export type DataContextType = {
 	setCurrentSaveGame: (key: string) => void;
 	setBoss: ({ boss }: { boss: Boss }) => void;
 	setDungeon: ({ dungeon, index }: { dungeon: Dungeon, index: 0 | 1 | 2 }) => void;
-	setCharacter: ({ character, index }: { character: Character, index: Class }) => void;
+	setCharacter: ({ playerStats, index }: { playerStats: PlayerStats, index: Class }) => void;
 	newSaveGame?: (key: string) => void,
 	deleteSaveGame?: (keyToDelete: string) => void
 }
@@ -42,13 +42,13 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 	const [data, setData] = useState<DataContextType>(getFromLocalStorage);
 
 	const { currentSaveGame, saveGames } = data;
-	console.log("DataProvider data", { data, currentSaveGame, saveGames })
+
 	useEffect(() => {
 		setInLocalStorage(data);
 	}, [data]);
 
 	const setCurrentSaveGame = (key: string) => {
-		console.log("DataProvider setCurrentSaveGame", key); setData({ currentSaveGame: key, saveGames });
+		setData({ currentSaveGame: key, saveGames });
 	}
 	const getCurrentSaveGameData = () => saveGames.get(currentSaveGame);
 
@@ -58,7 +58,25 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 
 	const newSaveGame = (key: string) => {
 
-		setData({ currentSaveGame, saveGames: new Map(saveGames?.set(key, { dungeons: [] })) });
+		setData(
+			{
+				currentSaveGame,
+				saveGames: new Map(
+					saveGames?.set(
+						key,
+						{
+							dungeons: [],
+							players: {
+								[Class.Fighter]: { level: "1", life: 10, coins: 0 },
+								[Class.Sorcerer]: { level: "1", life: 10, coins: 0 },
+								[Class.Bard]: { level: "1", life: 10, coins: 0 },
+								[Class.Rogue]: { level: "1", life: 10, coins: 0 },
+							}
+						}
+					)
+				)
+			}
+		);
 	}
 
 	const deleteSaveGame = (keyToDelete: string) => {
@@ -97,14 +115,14 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 		saveCurrentSaveGame(newSaveGame);
 	}
 
-	const setCharacter = ({ character, index }: { character: Character, index: Class }) => {
+	const setCharacter = ({ playerStats, index }: { playerStats: PlayerStats, index: Class }) => {
 		const saveGame = saveGames.get(currentSaveGame);
 
 		const { players } = saveGame;
 
 		const newSaveGame = {
 			...saveGame,
-			players: { ...players, [index]: character }
+			players: { ...players, [index]: playerStats }
 		};
 
 		saveCurrentSaveGame(newSaveGame);

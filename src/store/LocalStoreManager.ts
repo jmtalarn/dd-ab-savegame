@@ -4,11 +4,6 @@ import { DataContextType } from "./DataProvider"
 const LS_KEY = "DD-AB_SAVEGAME";
 
 export const setInLocalStorage = ({ currentSaveGame, saveGames }: DataContextType) => {
-	console.log({ currentSaveGame, saveGames })
-	console.log(JSON.stringify({
-		currentSaveGame,
-		saveGames: saveGames ? [...saveGames.entries()] : []
-	}))
 	window.localStorage.setItem(LS_KEY,
 		JSON.stringify({
 			currentSaveGame,

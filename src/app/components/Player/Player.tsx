@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { DataContext } from '../../../store/DataProvider';
 import Player from '../../../components/Player'
-import { Class, Characters } from '../../../components/Character/Character.types';
+import { Class } from '../../../components/Character/Character.types';
 
 
 
@@ -13,10 +13,11 @@ const PlayerWithContext = ({ playerClass = Class.Fighter }: Props) => {
 
 	const { players } = getCurrentSaveGameData();
 	const player = players?.[playerClass];
+
 	return <Player
 		playerClass={playerClass}
-		playerStats={{ character: player }}
-		onSave={({ character = Characters[0] }) => setCharacter({ character, index: playerClass })}
+		playerStats={{ ...player }}
+		onSave={(playerStats) => setCharacter({ playerStats, index: playerClass })}
 	/>
 }
 
