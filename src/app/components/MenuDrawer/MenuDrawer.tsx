@@ -39,7 +39,7 @@ const getComponentAndTitle = (keys?: MenuKeys[]) => {
 const MenuDrawer = () => {
 	const [selectedMenuItem, setSelectedMenuItem] = useState<MenuKeys[]>();
 	const { title, component } = getComponentAndTitle(selectedMenuItem);
-	console.log({ title, component })
+
 	const onClick: MenuProps['onClick'] = ({ keyPath }: MenuInfo) => {
 		setSelectedMenuItem(keyPath as MenuKeys[]);
 	};

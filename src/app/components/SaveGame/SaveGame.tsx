@@ -1,22 +1,22 @@
 import { useContext } from 'react';
 import { DataContext } from '../../../store/DataProvider';
 import SaveGame from '../../../components/SaveGame'
-import { SaveGameType } from '../../../store/SaveGameProvider';
+
 
 const SaveGameWithContext = () => {
 	const {
 		saveGames,
 		setCurrentSaveGame,
-		setNewSaveGame,
+		newSaveGame,
 		deleteSaveGame } = useContext(DataContext);
 
 	const onSetCurrentSaveGame = (currentKey: string) => {
-		const emptySaveGame: SaveGameType = {};
-		setCurrentSaveGame?.({ key: currentKey, savegame: saveGames?.get(currentKey) || emptySaveGame });
+		console.log("SETTING CURRENT SAVE GAME", currentKey)
+		setCurrentSaveGame?.(currentKey);
 	}
 
 	const onSetNewSaveGame = (key: string) => {
-		setNewSaveGame?.({ key, savegame: { dungeons: [] } })
+		newSaveGame?.(key)
 	}
 
 	return <SaveGame

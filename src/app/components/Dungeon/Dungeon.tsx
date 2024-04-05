@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SaveGameContext } from '../../../store/SaveGameProvider';
+import { DataContext } from '../../../store/DataProvider';
 import Dungeon from '../../../components/Dungeon'
 import { Dungeon as Dungeons } from '../../../components/Dungeon/Dungeon.types';
 
@@ -10,9 +10,9 @@ type Props = {
 	index: 0 | 1 | 2 | 3;
 }
 const DungeonWithContext = ({ index = 0 }: Props) => {
-	const { saveGame, setDungeon } = useContext(SaveGameContext);
-	console.log({ saveGame })
-	const { dungeons } = saveGame;
+	const { getCurrentSaveGameData, setDungeon } = useContext(DataContext);
+
+	const { dungeons } = getCurrentSaveGameData();
 	const dungeon = dungeons ? dungeons[index] as Dungeons : Dungeons.Gauntlgrym;
 	return <Dungeon
 		dungeon={dungeon}

@@ -7,7 +7,7 @@ import SaveGame from './app/components/SaveGame';
 import MenuDrawer from './app/components/MenuDrawer';
 import Drawer from './components/Drawer'
 import { DataProvider, DataContext } from "./store/DataProvider"
-import { SaveGameProvider } from "./store/SaveGameProvider"
+
 import 'antd/dist/reset.css';
 import './App.css';
 
@@ -17,29 +17,21 @@ import './App.css';
 //   <FontAwesomeIcon icon={faReact} size="8x" />
 // </a>
 
-function App() {
 
-
-  return (
-    <DataProvider>
-      <InnerApp />
-    </DataProvider>
-  );
-}
 
 const InnerApp = () => {
   const { currentSaveGame, setCurrentSaveGame } = useContext(DataContext);
-  const savegame = currentSaveGame?.savegame ?? { dungeons: [] };
 
   const onClose = () => setCurrentSaveGame?.(undefined)
-
-  return (<SaveGameProvider initialState={savegame}>
+  console.log("App currentSaveGame", currentSaveGame)
+  return (
     <div className="App">
       <Title />
       <SaveGame />
       {currentSaveGame && <Drawer open={!!currentSaveGame} onClose={onClose} title="Update your data"><MenuDrawer /></Drawer>}
     </div >
-  </SaveGameProvider>)
+  )
 }
 
+const App = () => (<DataProvider><InnerApp /></DataProvider>)
 export default App;

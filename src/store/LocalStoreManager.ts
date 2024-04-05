@@ -1,6 +1,5 @@
 
 import { DataContextType } from "./DataProvider"
-import { SaveGameType } from "./SaveGameProvider";
 
 const LS_KEY = "DD-AB_SAVEGAME";
 

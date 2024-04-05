@@ -1,0 +1,33 @@
+import { createContext, useState } from 'react';
+import { Boss, BossDungeonMap } from '../components/Boss/Boss.types';
+import { Dungeon } from '../components/Dungeon/Dungeon.types';
+import {
+	Character, Class
+} from '../components/Character/Character.types';
+
+
+
+
+export type SaveGameContextType = {
+	saveGame: SaveGameType,
+
+}
+
+export const SaveGameContext = createContext<SaveGameContextType>({} as SaveGameContextType);
+
+type SaveGameProviderProps = {
+	initialState?: SaveGameType;
+	children?: React.ReactNode
+}
+export const SaveGameProvider = ({ initialState = {}, children }: SaveGameProviderProps) => {
+	// this state will be shared with all components 
+	const [saveGame, setSaveGame] = useState<SaveGameType>(initialState);
+
+
+	return (
+		<SaveGameContext.Provider value={{ saveGame, setBoss, setDungeon, setCharacter }}>
+			{children}
+		</SaveGameContext.Provider>
+	);
+};
+
