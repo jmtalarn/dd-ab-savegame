@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Character, Characters, PlayerStats, Class, PersonalityValues, PersonalityType, AttackType, AttackValues, BackPacks, BackPackType, BackPacksNames, BackPacksNamesLabel, ObjectLooted } from '../Character/Character.types';
-import { Button, Form, Input, InputNumber, Select, Slider, Radio } from 'antd';
+import { Button, Form, Input, InputNumber, Select, Slider, Radio, Flex, Col } from 'antd';
 import CharacterName from '../CharacterName';
 import { enumToOptions } from '../../utils';
 
@@ -8,6 +8,7 @@ type Props = {
   playerStats?: PlayerStats;
   playerClass: Class;
   onSave?: (values: PlayerStats) => void
+  onCancel?: () => void
 };
 
 const filterAndFormatCharacterClassOptions = (characterClass: Class) => Characters.filter((character: Character) => character.class === characterClass).map((character: Character) => ({
@@ -22,7 +23,7 @@ const characterClassOptionsMap = ({
   [Class.Bard]: filterAndFormatCharacterClassOptions(Class.Bard),
 });
 
-const Player = ({ playerStats = { level: "1", life: 10, coins: 0 }, playerClass, onSave }: Props) => {
+const Player = ({ playerStats = { level: "1", life: 10, coins: 0 }, playerClass, onSave, onCancel }: Props) => {
   const [form] = Form.useForm();
 
   const charactersMap = new Map(Characters.map((character: Character) => ([character.name, character])));
@@ -153,11 +154,22 @@ const Player = ({ playerStats = { level: "1", life: 10, coins: 0 }, playerClass,
           options={enumToOptions(ObjectLooted)} />
       </Form.Item>
       <Form.Item >
-        <Button type="primary" htmlType="submit" block>
-          Save
-        </Button>
+        <Flex gap="middle" style={{ width: '100%' }} horizontal justify="center" >
+          <Col flex="2">
+            <Button style={{
+              minWidth: "unset"
+            }} block danger onClick={onCancel} >Cancel</Button>
+          </Col>
+          <Col flex="6">
+            <Button style={{
+              minWidth: "unset"
+            }} block type="primary" htmlType="submit"  >
+              Save
+            </Button>
+          </Col>
+        </Flex>
       </Form.Item>
-    </Form>
+    </Form >
   );
 };
 

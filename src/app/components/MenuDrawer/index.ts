@@ -1,1 +1,2 @@
-export { default } from './MenuDrawer';
+export { default, MenuDrawerContext, MenuDrawerProvider } from './MenuDrawer';
+

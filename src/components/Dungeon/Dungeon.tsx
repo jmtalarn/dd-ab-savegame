@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from 'react';
 import { Dungeon as Dungeons, DungeonLabel } from './Dungeon.types';
-import { Form, Select, Button } from 'antd';
+import { Form, Select, Button, Col, Flex } from 'antd';
 import { enumToOptions, enumKeyForValue } from '../../utils';
 
 
@@ -9,11 +9,16 @@ type Props = {
   blocked?: boolean;
   dungeonToIgnore?: Dungeons;
   onSave?: (values: Dungeons) => void
+  onCancel?: () => void
 };
 
-const Dungeon = ({ dungeon,
-  onSave, blocked = false, dungeonToIgnore
-}: Props) => {
+const Dungeon = (
+  { dungeon,
+    blocked = false,
+    dungeonToIgnore,
+    onCancel,
+    onSave
+  }: Props) => {
 
   const [form] = Form.useForm();
 
@@ -40,9 +45,20 @@ const Dungeon = ({ dungeon,
           options={enumToOptions(Dungeons, DungeonLabel, dungeonToIgnore)} />
       </Form.Item>
       {!blocked && <Form.Item >
-        <Button type="primary" htmlType="submit" block>
-          Save
-        </Button>
+        <Flex gap="middle" style={{ width: '100%' }} horizontal justify="center" >
+          <Col flex="2">
+            <Button style={{
+              minWidth: "unset"
+            }} block danger onClick={onCancel} >Cancel</Button>
+          </Col>
+          <Col flex="6">
+            <Button style={{
+              minWidth: "unset"
+            }} block type="primary" htmlType="submit"  >
+              Save
+            </Button>
+          </Col>
+        </Flex>
       </Form.Item>}
 
     </Form>

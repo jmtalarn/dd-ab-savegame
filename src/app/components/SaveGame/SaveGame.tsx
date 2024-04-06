@@ -11,7 +11,6 @@ const SaveGameWithContext = () => {
 		deleteSaveGame } = useContext(DataContext);
 
 	const onSetCurrentSaveGame = (currentKey: string) => {
-		console.log("SETTING CURRENT SAVE GAME", currentKey)
 		setCurrentSaveGame?.(currentKey);
 	}
 

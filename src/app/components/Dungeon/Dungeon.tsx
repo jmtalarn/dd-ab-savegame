@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { DataContext } from '../../../store/DataProvider';
+import { MenuDrawerContext } from '../MenuDrawer/MenuDrawer';
 import Dungeon from '../../../components/Dungeon'
 import { Dungeon as Dungeons } from '../../../components/Dungeon/Dungeon.types';
 
@@ -11,6 +12,7 @@ type Props = {
 }
 const DungeonWithContext = ({ index = 0 }: Props) => {
 	const { getCurrentSaveGameData, setDungeon } = useContext(DataContext);
+	const { setSelectedMenuItem } = useContext(MenuDrawerContext);
 
 	const { dungeons } = getCurrentSaveGameData();
 	const dungeon = dungeons ? dungeons[index] as Dungeons : Dungeons.Gauntlgrym;
@@ -19,6 +21,7 @@ const DungeonWithContext = ({ index = 0 }: Props) => {
 		blocked={index === 3}
 		onSave={(dungeon) => { setDungeon({ dungeon, index: index as (0 | 1 | 2) }) }}
 		dungeonToIgnore={(index !== 3 && dungeons) ? dungeons[3] : undefined}
+		onCancel={() => { setSelectedMenuItem?.(undefined) }}
 	/>
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext, createContext } from 'react';
 
 import Menu from '../../../components/Menu/Menu'
 import { MenuKeys, MenuKeysKey } from '../../../components/Menu/MenuKeys';
@@ -11,6 +11,28 @@ import { ClassKey } from '../../../components/Character/Character.types';
 import { capitalize, ordinalize } from '../../../utils'
 import type { MenuProps } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
+
+
+
+export const MenuDrawerContext = createContext<MenuKeys[]>();
+export const MenuDrawerProvider = ({ children }: { children?: React.ReactNode }) => {
+	const [selectedMenuItem, setSelectedMenuItem] = useState<MenuKeys[]>();
+
+	return (
+		<MenuDrawerContext.Provider
+			value={{
+				selectedMenuItem,
+				setSelectedMenuItem
+			}}
+		>
+			{children}
+		</MenuDrawerContext.Provider>
+	)
+
+
+}
+
+
 
 
 const getComponentAndTitle = (keys?: MenuKeys[]) => {
@@ -37,7 +59,7 @@ const getComponentAndTitle = (keys?: MenuKeys[]) => {
 
 
 const MenuDrawer = () => {
-	const [selectedMenuItem, setSelectedMenuItem] = useState<MenuKeys[]>();
+	const { selectedMenuItem, setSelectedMenuItem } = useContext(MenuDrawerContext);
 	const { title, component } = getComponentAndTitle(selectedMenuItem);
 
 	const onClick: MenuProps['onClick'] = ({ keyPath }: MenuInfo) => {

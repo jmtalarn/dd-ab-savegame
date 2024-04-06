@@ -4,10 +4,9 @@ import { useContext } from 'react';
 
 import Title from './components/Title'
 import SaveGame from './app/components/SaveGame';
-import MenuDrawer from './app/components/MenuDrawer';
+import MenuDrawer, { MenuDrawerProvider } from './app/components/MenuDrawer';
 import Drawer from './components/Drawer'
 import { DataProvider, DataContext } from "./store/DataProvider"
-
 import 'antd/dist/reset.css';
 import './App.css';
 
@@ -32,5 +31,5 @@ const InnerApp = () => {
   )
 }
 
-const App = () => (<DataProvider><InnerApp /></DataProvider>)
+const App = () => (<DataProvider><MenuDrawerProvider><InnerApp /></MenuDrawerProvider></DataProvider>)
 export default App;
