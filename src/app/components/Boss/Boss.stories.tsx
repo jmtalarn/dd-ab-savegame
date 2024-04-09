@@ -1,27 +1,23 @@
 import type { Meta } from '@storybook/react';
 
-import { SaveGameProvider } from "../../../store/SaveGameProvider";
+import { DataProvider } from "../../../store/DataProvider";
+import { MenuDrawerProvider } from '../MenuDrawer';
 import Boss from "./Boss";
 
 const meta = {
   title: "App/Boss",
   component: Boss,
-  decorators: [(story) => <SaveGameProvider>
-    {story()}
-  </SaveGameProvider>]
+  decorators: [(story) => (
+    <DataProvider>
+      <MenuDrawerProvider>
+        {story()}
+      </MenuDrawerProvider>
+    </DataProvider>
+  )]
 } satisfies Meta<typeof Boss>;
 export default meta;
 
 export const Default = {};
 
-export const Error = {};
 
-// const Template: StoryObj<typeof meta> = (args) => (
-//   <SaveGameProvider>
-//     <Boss {...args} />
-//   </SaveGameProvider>
-// );
 
-// export const Default = Template.bind({});
-
-// Default.args = {};

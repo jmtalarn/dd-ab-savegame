@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import { Character, Characters, PlayerStats, Class, PersonalityValues, PersonalityType, AttackType, AttackValues, BackPacks, BackPackType, BackPacksNames, BackPacksNamesLabel, ObjectLooted } from '../Character/Character.types';
-import { Button, Form, Input, InputNumber, Select, Slider, Radio, Flex, Col } from 'antd';
+import { Form, Input, InputNumber, Select, Slider, Radio } from 'antd';
 import CharacterName from '../CharacterName';
+import PlayerPosition from '../PlayerPosition';
 import { enumToOptions } from '../../utils';
+
+
+
 
 type Props = {
   playerStats?: PlayerStats;
   playerClass: Class;
-  onSave?: (values: PlayerStats) => void
-  onCancel?: () => void
+  onSave?: (values: PlayerStats) => void;
+  children?: React.ReactNode;
 };
 
 const filterAndFormatCharacterClassOptions = (characterClass: Class) => Characters.filter((character: Character) => character.class === characterClass).map((character: Character) => ({
@@ -23,7 +27,7 @@ const characterClassOptionsMap = ({
   [Class.Bard]: filterAndFormatCharacterClassOptions(Class.Bard),
 });
 
-const Player = ({ playerStats = { level: "1", life: 10, coins: 0 }, playerClass, onSave, onCancel }: Props) => {
+const Player = ({ playerStats = { level: "1", life: 10, coins: 0, position: {} }, playerClass, onSave, children }: Props) => {
   const [form] = Form.useForm();
 
   const charactersMap = new Map(Characters.map((character: Character) => ([character.name, character])));
@@ -88,7 +92,7 @@ const Player = ({ playerStats = { level: "1", life: 10, coins: 0 }, playerClass,
       onFinish={onFinish}
       form={form}
     >
-      <Form.Item name="identifier" label="identifer">
+      <Form.Item name="identifier" label="Identifer">
         <Input placeholder="Mama, Papa, Miquel, Jordi ..." />
       </Form.Item>
 
@@ -153,23 +157,11 @@ const Player = ({ playerStats = { level: "1", life: 10, coins: 0 }, playerClass,
           onChange={setLoot}
           options={enumToOptions(ObjectLooted)} />
       </Form.Item>
-      <Form.Item >
-        <Flex gap="middle" style={{ width: '100%' }} horizontal justify="center" >
-          <Col flex="2">
-            <Button style={{
-              minWidth: "unset"
-            }} block danger onClick={onCancel} >Cancel</Button>
-          </Col>
-          <Col flex="6">
-            <Button style={{
-              minWidth: "unset"
-            }} block type="primary" htmlType="submit"  >
-              Save
-            </Button>
-          </Col>
-        </Flex>
+      <Form.Item name="position" label="Position">
+        <PlayerPosition />
       </Form.Item>
-    </Form >
+      {children}
+    </Form>
   );
 };
 

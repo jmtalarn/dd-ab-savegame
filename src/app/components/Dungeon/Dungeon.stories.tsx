@@ -1,14 +1,15 @@
 import type { Meta } from '@storybook/react';
-import { Dungeon as Dungeons } from "../../../components/Dungeon/Dungeon.types";
-import { SaveGameProvider } from "../../../store/SaveGameProvider";
+// import { Dungeon as Dungeons } from "../../../components/Dungeon/Dungeon.types";
+import { DataProvider } from "../../../store/DataProvider";
 import Dungeon from "./Dungeon";
+import { MenuDrawerProvider } from '../MenuDrawer';
 
-const dungeons = [
-  Dungeons.Gauntlgrym,
-  Dungeons.HotenowMount,
-  Dungeons.Neverwinter,
-  Dungeons.NeverwinterForest,
-];
+// const dungeons = [
+//   Dungeons.Gauntlgrym,
+//   Dungeons.HotenowMount,
+//   Dungeons.Neverwinter,
+//   Dungeons.NeverwinterForest,
+// ];
 
 
 const meta = {
@@ -17,22 +18,12 @@ const meta = {
   argTypes: {
     index: { control: { type: "number", min: 0, max: 3 } },
   },
-  decorators: [(story) => <SaveGameProvider initialState={{ dungeons }}>
-    {story()}
-  </SaveGameProvider>]
+  decorators: [(story) => <DataProvider>
+    <MenuDrawerProvider>
+      {story()}
+    </MenuDrawerProvider>
+  </DataProvider>]
 } satisfies Meta<typeof Dungeon>;
 export default meta;
 
 export const Default = {};
-
-export const Error = {};
-
-// const Template: StoryObj<typeof meta> = (args) => (
-//   <SaveGameProvider initialState={{ dungeons }}>
-//     <Dungeon {...args} />
-//   </SaveGameProvider>
-// );
-
-// export const Default = Template.bind({});
-
-// Default.args = {};

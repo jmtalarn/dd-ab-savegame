@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   stroke="#000000"
+   stroke-linecap="round"
+   stroke-linejoin="round"
+   fill="none"
+   fill-rule="evenodd"
+   viewBox="0 0 35 44"
+   version="1.1"
+   id="svg9"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+   preserveAspectRatio
+  <defs
+     id="defs9" />
+  <circle
+     cx="17.509003"
+     cy="2.3899999"
+     r="1.89"
+     id="circle1" />
+  <circle
+     cx="17.509003"
+     cy="11.838998"
+     r="1.89"
+     id="circle2" />
+  <circle
+     cx="32.626999"
+     cy="19.397999"
+     r="1.89"
+     id="circle3" />
+  <circle
+     cx="17.509003"
+     cy="26.956997"
+     r="1.89"
+     id="circle4" />
+  <circle
+     cx="2.3899999"
+     cy="34.515999"
+     r="1.89"
+     id="circle5" />
+  <circle
+     cx="17.509003"
+     cy="42.074997"
+     r="1.89"
+     id="circle6" />
+  <path
+     d="m 17.509002,5.2249993 v 4.724"
+     id="path6" />
+  <path
+     d="m 19.399002,11.838999 10.714,7.505"
+     stroke-dasharray="1, 2"
+     id="path7" />
+  <path
+     d="m 17.509002,28.846999 v 11.339 m 0,-26.457 v 11.339"
+     id="path8" />
+  <g
+     stroke-dasharray="1, 2"
+     id="g9"
+     transform="translate(-65.140998,-25.456001)">
+    <path
+       d="m 84.54,51.468 11.329,-6.54 M 69.42,59.972 80.136,67.476 m -10.715,-7.504 11.33,-6.54"
+       id="path9" />
+  </g>
+</svg>

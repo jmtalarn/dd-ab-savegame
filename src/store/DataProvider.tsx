@@ -3,7 +3,7 @@ import { setInLocalStorage, getFromLocalStorage } from './LocalStoreManager';
 import { Boss, BossDungeonMap } from '../components/Boss/Boss.types';
 import { Dungeon } from '../components/Dungeon/Dungeon.types';
 import {
-	Character, Class
+	PlayerStats, Class
 } from '../components/Character/Character.types';
 
 
@@ -23,10 +23,10 @@ export type SaveGameType = {
 	boss?: Boss;
 	dungeons?: Array<Dungeon | undefined>;
 	players?: {
-		[Class.Fighter]?: Character;
-		[Class.Sorcerer]?: Character;
-		[Class.Bard]?: Character;
-		[Class.Rogue]?: Character;
+		[Class.Fighter]?: PlayerStats;
+		[Class.Sorcerer]?: PlayerStats;
+		[Class.Bard]?: PlayerStats;
+		[Class.Rogue]?: PlayerStats;
 	};
 }
 
@@ -35,11 +35,12 @@ export const DataContext = createContext<DataContextType>({});
 
 type DataProviderProps = {
 	children?: React.ReactNode
+	initialState: SaveGameType
 }
-export const DataProvider = ({ children }: DataProviderProps) => {
+export const DataProvider = ({ children, initialState }: DataProviderProps) => {
 	// this state will be shared with all components 
 
-	const [data, setData] = useState<DataContextType>(getFromLocalStorage);
+	const [data, setData] = useState<DataContextType>(getFromLocalStorage || initialState);
 
 	const { currentSaveGame, saveGames } = data;
 

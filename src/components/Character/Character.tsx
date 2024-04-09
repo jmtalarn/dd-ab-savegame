@@ -6,22 +6,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVenus, faMars } from '@fortawesome/pro-solid-svg-icons';
 import styles from './Character.module.css';
 import '../../styles/generic.module.css';
-import { Character, Sex } from './Character.types';
+import { Character, Sex, ClassLabel, RaceLabel } from './Character.types';
 import CharacterName from '../CharacterName';
 import { capitalize } from '../../utils';
 
 type Props = {
-  //playerStats: PlayerStats;
   character: Character;
 };
-// const labelCol = { span: 3, offset: 0 };
+
 
 const Player = ({ character }: Props) => {
   return (
     <Card title={<CharacterName classType={character.class} text={character.name} />}>
       <div className={styles['card-content']}>
-        <p>{capitalize(character.class)}</p>
-        <p>{capitalize(character.race)}</p>
+        <p>{capitalize(ClassLabel.get(character.class))}</p>
+        <p>{capitalize(RaceLabel.get(character.race))}</p>
         <p>
           <FontAwesomeIcon icon={character.sex === Sex.Male ? faMars : faVenus} />
         </p>

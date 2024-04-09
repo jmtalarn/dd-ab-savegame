@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk, faTrashCan } from '@fortawesome/pro-duotone-svg-icons';
 import { Button, Popconfirm } from 'antd';
-//import cx from 'classnames';
 import styles from './SaveGame.module.css';
-//import { ReactComponent as TitleIcon } from "../../assets/icon.svg"
 
 
 type SaveGameProps = {

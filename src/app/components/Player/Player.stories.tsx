@@ -1,7 +1,8 @@
 import type { Meta } from '@storybook/react';
-import { SaveGameProvider } from "../../../store/SaveGameProvider";
+import { DataProvider } from "../../../store/DataProvider";
 import { Class } from "../../../components/Character/Character.types";
 import Player from "./Player";
+import { MenuDrawerProvider } from '../MenuDrawer';
 
 const meta = {
   title: "App/Player",
@@ -18,20 +19,8 @@ const meta = {
       },
     },
   },
-  decorators: [(story) => <SaveGameProvider initialState={{}}>{story()}</SaveGameProvider>]
+  decorators: [(story) => <DataProvider><MenuDrawerProvider>{story()}</MenuDrawerProvider></DataProvider>]
 } satisfies Meta<typeof Player>;
 export default meta;
 
 export const Default = {};
-
-export const Error = {};
-
-// const Template: StoryObj<typeof meta> = (args) => (
-//   <SaveGameProvider initialState={{}}>
-//     <Player {...args} />
-//   </SaveGameProvider>
-// );
-
-// export const Default = Template.bind({});
-
-// Default.args = {};
