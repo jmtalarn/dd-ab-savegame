@@ -1,15 +1,25 @@
-.header{
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.header {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  
+  margin-bottom: 2rem;
 }
+
+.h1 {
+  font-weight: bold;
+}
+
+
+
 .title {
   display: flex;
-  align-items:center;
+  align-items: center;
   gap: 5px;
   margin: 5px;
+  font-size: 1.2rem;
+  justify-content: center;
 }
+
 .title-icon {
   width: 2em !important;
   min-width: 2em;

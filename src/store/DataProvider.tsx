@@ -35,12 +35,11 @@ export const DataContext = createContext<DataContextType>({});
 
 type DataProviderProps = {
 	children?: React.ReactNode
-	initialState: SaveGameType
 }
-export const DataProvider = ({ children, initialState }: DataProviderProps) => {
+export const DataProvider = ({ children }: DataProviderProps) => {
 	// this state will be shared with all components 
 
-	const [data, setData] = useState<DataContextType>(getFromLocalStorage || initialState);
+	const [data, setData] = useState<DataContextType>(getFromLocalStorage);
 
 	const { currentSaveGame, saveGames } = data;
 

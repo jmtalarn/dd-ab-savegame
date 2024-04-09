@@ -7,7 +7,7 @@ const BottomButtons = () => {
 	const { setSelectedMenuItem } = useContext(MenuDrawerContext);
 
 	return (<Form.Item className={styles['bottom-buttons']}>
-		<Flex gap="middle" style={{ width: '100%' }} horizontal justify="center" >
+		<Flex gap="middle" style={{ width: '100%' }} justify="center" >
 			<Col flex="2">
 				<Button style={{
 					minWidth: "unset"
@@ -16,7 +16,8 @@ const BottomButtons = () => {
 			<Col flex="6">
 				<Button style={{
 					minWidth: "unset"
-				}} block type="primary" htmlType="submit"  >
+				}} block type="primary" htmlType="submit"
+				>
 					Save
 				</Button>
 			</Col>

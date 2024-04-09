@@ -1,15 +1,17 @@
 button {
   min-width: 18rem;
 }
+
 .save-button {
   margin-bottom: 1rem;
   display: flex;
 
   justify-content: space-evenly;
   align-items: center;
+  width: 100%;
 }
 
-.savegame-list{
+.savegame-list {
   gap: 1rem;
   display: flex;
   flex-direction: column;
@@ -23,4 +25,3 @@ button {
   justify-content: space-between;
   width: 22rem;
 }
-
