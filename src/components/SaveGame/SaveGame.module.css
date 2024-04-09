@@ -9,6 +9,7 @@ button {
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
+  max-width: 22rem;
 }
 
 .savegame-list {
@@ -23,5 +24,6 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 22rem;
+  max-width: 22rem;
+  width: 100%;
 }
