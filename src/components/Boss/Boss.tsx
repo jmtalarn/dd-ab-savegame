@@ -13,11 +13,11 @@ type Props = {
 const Boss = ({ boss, onSave, children }: Props) => {
   const [form] = Form.useForm();
   const [bossSelected, setBossSelected] = useState<BossEnum | undefined>(boss);
+  console.log({ bossSelected })
 
 
-
-  const onFinish = (values: BossEnum) => {
-    onSave?.(values);
+  const onFinish = ({ boss }: { boss: BossEnum }) => {
+    onSave?.({ boss });
   };
 
   return (

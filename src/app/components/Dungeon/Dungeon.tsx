@@ -14,11 +14,12 @@ const DungeonWithContext = ({ index = 0 }: Props) => {
 	const { getCurrentSaveGameData, setDungeon } = useContext(DataContext);
 	const { setSelectedMenuItem } = useContext(MenuDrawerContext);
 	const { dungeons = [] } = getCurrentSaveGameData() ?? {};
+	console.log({ dungeons, index })
 	const dungeon = dungeons ? dungeons[index] as Dungeons : Dungeons.Gauntlgrym;
 	return <Dungeon
 		dungeon={dungeon as Dungeons}
 		blocked={index === 3}
-		onSave={(dungeon) => { setDungeon({ dungeon, index: index as (0 | 1 | 2) }); setSelectedMenuItem(undefined); }}
+		onSave={({ dungeon }) => { setDungeon({ dungeon, index: index as (0 | 1 | 2) }); setSelectedMenuItem(undefined); }}
 		dungeonToIgnore={(index !== 3 && dungeons) ? dungeons[3] : undefined}
 	>
 		<BottomButtons />

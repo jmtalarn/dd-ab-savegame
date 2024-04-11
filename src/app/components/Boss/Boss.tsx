@@ -9,10 +9,11 @@ const BossWithContext = () => {
 	const { setSelectedMenuItem } = useContext(MenuDrawerContext);
 	console.log("getCurrentSaveGameData", getCurrentSaveGameData())
 	const { boss = undefined } = getCurrentSaveGameData() ?? {};
+	console.log("currentSaveGameData", { boss })
 	return (
 		<Boss
 			boss={boss}
-			onSave={(boss) => { setBoss({ boss }); setSelectedMenuItem(undefined); }}
+			onSave={({ boss }) => { setBoss({ boss }); setSelectedMenuItem(undefined); }}
 		>
 			<BottomButtons />
 		</Boss>

@@ -20,8 +20,8 @@ const Dungeon = (
 
   const [form] = Form.useForm();
 
-  const onFinish = (values: Dungeons) => {
-    onSave?.(values);
+  const onFinish = ({ dungeon }: { dungeon: Dungeons }) => {
+    onSave?.({ dungeon });
   };
 
 
