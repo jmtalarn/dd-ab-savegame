@@ -6,7 +6,7 @@ import { enumToOptions } from '../../utils';
 
 type Props = {
   boss?: BossEnum;
-  onSave?: (values: BossEnum) => void;
+  onSave?: ({ boss }: { boss: BossEnum }) => void;
   children?: React.ReactNode;
 };
 

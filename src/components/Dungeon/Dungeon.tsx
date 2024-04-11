@@ -6,7 +6,7 @@ type Props = {
   dungeon?: Dungeons;
   blocked?: boolean;
   dungeonToIgnore?: Dungeons;
-  onSave?: (values: Dungeons) => void;
+  onSave?: ({ dungeon }: { dungeon: Dungeons }) => void;
   children?: React.ReactNode;
 };
 

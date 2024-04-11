@@ -113,7 +113,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 
 		const dungeons = [...currentSaveGameData.dungeons!];
 		console.log("Dungeon for boss", { dungeon: BossDungeonMap.get(Number(boss)) });
-		dungeons[3] = BossDungeonMap.get(Number(boss))?.toString();
+		dungeons[3] = BossDungeonMap.get(Number(boss))?.toString() as unknown as Dungeon;
 
 		const newSaveGame = {
 			...currentSaveGameData,
@@ -129,7 +129,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 		const saveGame = (currentSaveGame ? saveGames.get(currentSaveGame) : { dungeons: [] }) || { dungeons: [] };
 		const dungeons = [...saveGame.dungeons!];
 
-		dungeons[index] = dungeon.toString();
+		dungeons[index] = dungeon as Dungeon;
 		const newSaveGame = {
 			...saveGame,
 			dungeons: [...dungeons]
