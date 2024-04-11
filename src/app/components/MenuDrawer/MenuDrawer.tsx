@@ -13,10 +13,15 @@ import type { MenuProps } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
 
 
+export type MenuDrawerContextType = {
+	selectedMenuItem?: MenuKeys[];
+	setSelectedMenuItem: (menuKeys: MenuKeys[] | undefined) => void;
+}
 
-export const MenuDrawerContext = createContext<MenuKeys[]>();
+export const MenuDrawerContext = createContext<MenuDrawerContextType>({ setSelectedMenuItem: (menuKeys: MenuKeys[] | undefined) => { throw new Error(`MenuDrawerProvider must be used in order to set the selected menu item ${menuKeys?.toString()}`) } });
+
 export const MenuDrawerProvider = ({ children }: { children?: React.ReactNode }) => {
-	const [selectedMenuItem, setSelectedMenuItem] = useState<MenuKeys[]>();
+	const [selectedMenuItem, setSelectedMenuItem] = useState<MenuKeys[] | undefined>();
 
 	return (
 		<MenuDrawerContext.Provider
@@ -36,19 +41,20 @@ export const MenuDrawerProvider = ({ children }: { children?: React.ReactNode })
 
 
 const getComponentAndTitle = (keys?: MenuKeys[]) => {
+
 	if (!keys || !keys.length) { return ({ title: null, component: null }) }
-	const kind = MenuKeysKey.get(keys.slice(-1)[0]);
+	const kind = MenuKeysKey.get(keys.slice(-1)[0].toString());
 
 	switch (kind) {
 		case MenuKeys.FinalBoss:
 			return ({ component: <Boss />, title: "Final Boss" });
 		case MenuKeys.Dungeons: {
-			const index = parseInt(keys[0].split(" ")[1], 10);
+			const index = parseInt(keys[0].toString().split(" ")[1], 10);
 			const title = `${ordinalize(index, 4)} Dungeon`;
 			return ({ component: <Dungeon index={(index - 1) as (0 | 1 | 2 | 3)} />, title });
 		}
 		case MenuKeys.Heroes: {
-			const playerClass = keys[0];
+			const playerClass = keys[0].toString();
 			const title = <CharacterName classType={ClassKey.get(playerClass)} text={`${capitalize(playerClass)} character`} />;
 			return ({ component: <Player playerClass={ClassKey.get(playerClass)} />, title });
 		}
@@ -61,9 +67,9 @@ const getComponentAndTitle = (keys?: MenuKeys[]) => {
 const MenuDrawer = () => {
 	const { selectedMenuItem, setSelectedMenuItem } = useContext(MenuDrawerContext);
 	const { title, component } = getComponentAndTitle(selectedMenuItem);
-
+	console.log({ title, component })
 	const onClick: MenuProps['onClick'] = ({ keyPath }: MenuInfo) => {
-		setSelectedMenuItem(keyPath as MenuKeys[]);
+		setSelectedMenuItem(keyPath as unknown as MenuKeys[]);
 	};
 
 	const onClose = () => {

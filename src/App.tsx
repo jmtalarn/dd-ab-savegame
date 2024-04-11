@@ -26,7 +26,7 @@ const InnerApp = () => {
     <div className="App">
       <Title />
       <SaveGame />
-      {currentSaveGame && <Drawer open={!!currentSaveGame} onClose={onClose} title="Update your data"><MenuDrawer onCancel={onClose} /></Drawer>}
+      {currentSaveGame && <Drawer open={!!currentSaveGame} onClose={onClose} title="Update your data"><MenuDrawer /></Drawer>}
     </div >
   )
 }

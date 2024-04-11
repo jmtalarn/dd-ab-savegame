@@ -15,7 +15,7 @@ export const RaceLabel: Map<Race, string> = new Map([
 ]);
 
 export enum Class {
-  Bard,
+  Bard = 1,
   Fighter,
   Sorcerer,
   Rogue,
@@ -39,7 +39,7 @@ export enum Sex {
   Male,
   Female,
 }
-export const SexLabel: Map<Class, string> = new Map([
+export const SexLabel: Map<Sex, string> = new Map([
   [Sex.Male, 'male'],
   [Sex.Female, 'female']
 ]);
@@ -242,6 +242,10 @@ export enum ObjectLooted {
   'Mimeto mascota',
   'Tomo abrumador',
 }
+export type PlayerPosition = {
+  dungeon?: Dungeon;
+  dungeonPosition?: DungeonPosition;
+};
 
 export type PlayerStats = {
   character?: Character;
@@ -249,7 +253,7 @@ export type PlayerStats = {
   level?: AttackLevel;
   coins?: number;
   life?: LifeRange;
-  position?: { dungeon: Dungeon; position: DungeonPosition };
+  position?: PlayerPosition;
   personality?: PersonalityType;
   attacks?: AttackType;
   loot?: ObjectLooted[];

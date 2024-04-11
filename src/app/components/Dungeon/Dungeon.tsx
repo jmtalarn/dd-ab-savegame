@@ -16,7 +16,7 @@ const DungeonWithContext = ({ index = 0 }: Props) => {
 	const { dungeons = [] } = getCurrentSaveGameData() ?? {};
 	const dungeon = dungeons ? dungeons[index] as Dungeons : Dungeons.Gauntlgrym;
 	return <Dungeon
-		dungeon={dungeon?.toString()}
+		dungeon={dungeon as Dungeons}
 		blocked={index === 3}
 		onSave={(dungeon) => { setDungeon({ dungeon, index: index as (0 | 1 | 2) }); setSelectedMenuItem(undefined); }}
 		dungeonToIgnore={(index !== 3 && dungeons) ? dungeons[3] : undefined}

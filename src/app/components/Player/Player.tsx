@@ -7,7 +7,7 @@ import BottomButtons from '../BottomButtons';
 
 
 type Props = {
-	playerClass: Class.Fighter | Class.Sorcerer | Class.Bard | Class.Rogue;
+	playerClass?: Class.Fighter | Class.Sorcerer | Class.Bard | Class.Rogue;
 }
 const PlayerWithContext = ({ playerClass = Class.Fighter }: Props) => {
 	const { getCurrentSaveGameData, setCharacter } = useContext(DataContext);

@@ -4,6 +4,7 @@ import { Form, Input, InputNumber, Select, Slider, Radio } from 'antd';
 import CharacterName from '../CharacterName';
 import PlayerPosition from '../PlayerPosition';
 import { enumToOptions } from '../../utils';
+import { FormLayout } from 'antd/es/form/Form';
 
 
 
@@ -45,7 +46,7 @@ const Player = ({ playerStats = { level: "1", life: 10, coins: 0, position: {} }
   };
 
   const playerStatsBackPack = playerStats?.backpack ? backpacksMap.get(playerStats?.backpack.backpack) : undefined;
-  const [backpack, setBackpack] = useState<BackPackType>(playerStatsBackPack);
+  const [backpack, setBackpack] = useState<BackPackType | undefined>(playerStatsBackPack);
 
   const [loot, setLoot] = useState<ObjectLooted[]>([]);
 
@@ -78,7 +79,7 @@ const Player = ({ playerStats = { level: "1", life: 10, coins: 0, position: {} }
 
   const layout = {
     labelCol: { span: 4 },
-    layout: "horizontal"
+    layout: "horizontal" as FormLayout
   };
 
 
@@ -155,9 +156,11 @@ const Player = ({ playerStats = { level: "1", life: 10, coins: 0, position: {} }
           placeholder="Select your looted objects"
           mode="multiple"
           onChange={setLoot}
-          options={enumToOptions(ObjectLooted)} />
+          options={enumToOptions(ObjectLooted as unknown as ObjectLooted)} />
       </Form.Item>
       <Form.Item name="position" label="Position">
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore */}
         <PlayerPosition />
       </Form.Item>
       {children}

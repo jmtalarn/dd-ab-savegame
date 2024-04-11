@@ -19,8 +19,8 @@ const Player = ({ character }: Props) => {
   return (
     <Card title={<CharacterName classType={character.class} text={character.name} />}>
       <div className={styles['card-content']}>
-        <p>{capitalize(ClassLabel.get(character.class))}</p>
-        <p>{capitalize(RaceLabel.get(character.race))}</p>
+        <p>{capitalize(ClassLabel.get(character.class) ?? '')}</p>
+        <p>{capitalize(RaceLabel.get(character.race) ?? '')}</p>
         <p>
           <FontAwesomeIcon icon={character.sex === Sex.Male ? faMars : faVenus} />
         </p>

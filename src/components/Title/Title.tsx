@@ -7,7 +7,7 @@ import { ReactComponent as TitleIcon } from "../../assets/icon.svg"
 
 
 const Title = () => {
-  return (<header className={cx([styles.header, styles.h1])}>
+  return (<header className={cx([styles.header])}>
     <h1 className={cx([styles.title])}>
       <TitleIcon className={cx([styles['title-icon']])} />
       <span>Dungeons & Dragons</span><span> ~ </span><span>Adventure Begins</span>

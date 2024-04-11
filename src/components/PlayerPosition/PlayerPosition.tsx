@@ -1,28 +1,35 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import cx from 'classnames';
-import { Radio, Row, Col, Select } from 'antd';
+import { Radio, Row, Col, Select, RadioChangeEvent } from 'antd';
 import styles from './PlayerPosition.module.css'
 import route from './route.svg'
-import { Dungeon as Dungeons, DungeonLabel } from '../Dungeon/Dungeon.types';
-import { DungeonPosition } from '../Character/Character.types';
+import { Dungeon, DungeonLabel } from '../Dungeon/Dungeon.types';
+import { DungeonPosition, PlayerPosition as PlayerPositionType } from '../Character/Character.types';
 import { enumToOptions } from '../../utils/strings'
 
-const PlayerPosition: React.FC = ({ value = {}, onChange }) => {
-	const [dungeon, setDungeon] = useState<DungeonType>();
-	const [position, setPosition] = useState<DungeonPosition>();
+const PlayerPosition = (
+	{ value = {},
+		onChange
+	}: {
+		value: PlayerPositionType,
+		onChange: (playerPosition: PlayerPositionType) => void
+	}
+) => {
 
+	const [dungeon, setDungeon] = useState<Dungeon>();
+	const [dungeonPosition, setDungeonPosition] = useState<DungeonPosition>();
 
-	const onRadioGroupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		// radioGroupRef.current.querySelectorAll(`.ant-radio-checked`).forEach(el => el.classList.remove("ant-radio-checked"));
+	const onRadioGroupChange = (e: RadioChangeEvent) => {
+
 		const newPosition = e.target.value;
 
-		setPosition(newPosition);
-		onChange?.({ dungeon, position: newPosition })
+		setDungeonPosition(newPosition);
+		onChange?.({ dungeon, dungeonPosition: newPosition })
 	}
 
-	const onSelectChange = (newDungeon: DungeonType) => {
+	const onSelectChange = (newDungeon: Dungeon) => {
 		setDungeon(newDungeon);
-		onChange?.({ position, dungeon: newDungeon })
+		onChange?.({ dungeonPosition, dungeon: newDungeon })
 	}
 
 	return (
@@ -31,7 +38,7 @@ const PlayerPosition: React.FC = ({ value = {}, onChange }) => {
 				<Select
 					className={styles.select}
 					placeholder="Select a dungeon"
-					options={enumToOptions(Dungeons, DungeonLabel)}
+					options={enumToOptions(Dungeon as unknown as Dungeon, DungeonLabel)}
 					value={value.dungeon || dungeon}
 					onChange={onSelectChange}
 
@@ -41,15 +48,15 @@ const PlayerPosition: React.FC = ({ value = {}, onChange }) => {
 				<img src={route} className={styles.route} />
 				<Radio.Group
 					className={styles['radio-group']}
-					value={value.position || position}
+					value={value.dungeonPosition || dungeonPosition}
 					onChange={onRadioGroupChange}
 				>
-					<Radio className={cx([styles.final])} value={6} checked={position === 6} />
-					<Radio value={5} className={cx([styles.fifth])} checked={position === 5} />
-					<Radio className={cx([styles.fourth])} value={4} checked={position === 4} />
-					<Radio value={3} className={cx([styles.third])} checked={position === 3} />
-					<Radio className={cx([styles.second])} value={2} checked={position === 2} />
-					<Radio value={1} className={cx([styles.first])} checked={position === 1} />
+					<Radio className={cx([styles.final])} value={6} checked={dungeonPosition === 6} />
+					<Radio value={5} className={cx([styles.fifth])} checked={dungeonPosition === 5} />
+					<Radio className={cx([styles.fourth])} value={4} checked={dungeonPosition === 4} />
+					<Radio value={3} className={cx([styles.third])} checked={dungeonPosition === 3} />
+					<Radio className={cx([styles.second])} value={2} checked={dungeonPosition === 2} />
+					<Radio value={1} className={cx([styles.first])} checked={dungeonPosition === 1} />
 
 				</Radio.Group>
 			</Col>

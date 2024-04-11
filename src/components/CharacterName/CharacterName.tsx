@@ -12,14 +12,15 @@ const ClassIconMap = {
   [Class.Rogue]: faDagger,
 };
 type Props = {
-  classType: Class;
+  classType?: Class;
   text: string;
 };
 
 const CharacterName = ({ classType, text }: Props) => {
+
   return (
-    <div className={cx(generic[ClassLabel.get(classType)], styles.label)}>
-      <FontAwesomeIcon icon={ClassIconMap[classType]} />
+    <div className={cx(generic[(classType ? ClassLabel.get(classType) : '') ?? ''], styles.label)}>
+      {!!classType && <FontAwesomeIcon icon={ClassIconMap[classType]} />}
       <span>{text}</span>
     </div>
   );

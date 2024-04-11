@@ -12,8 +12,10 @@ type Props = {
 
 const Boss = ({ boss, onSave, children }: Props) => {
   const [form] = Form.useForm();
-  const [bossSelected, setBossSelected] = useState<BossEnum>(boss);
-  console.log({ bossSelected })
+  const [bossSelected, setBossSelected] = useState<BossEnum | undefined>(boss);
+
+
+
   const onFinish = (values: BossEnum) => {
     onSave?.(values);
   };
@@ -26,9 +28,9 @@ const Boss = ({ boss, onSave, children }: Props) => {
     >
       <Form.Item name="boss" label="Boss">
         <Select
-          onChange={(value: string) => { setBossSelected(value as BossEnum) }}
+          onChange={(value: string) => { setBossSelected(value as unknown as BossEnum) }}
           placeholder="Select a final boss"
-          options={enumToOptions(BossEnum, BossLabel)}
+          options={enumToOptions(BossEnum as unknown as BossEnum, BossLabel)}
         />
       </Form.Item>
       <Form.Item label={bossSelected && "Last dungeon"} >

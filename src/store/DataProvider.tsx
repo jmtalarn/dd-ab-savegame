@@ -1,23 +1,35 @@
 import { createContext, useState, useEffect } from 'react';
 import { setInLocalStorage, getFromLocalStorage } from './LocalStoreManager';
-import { Boss, BossDungeonMap } from '../components/Boss/Boss.types';
-import { Dungeon } from '../components/Dungeon/Dungeon.types';
+import { Boss, BossLabel, BossDungeonMap } from '../components/Boss/Boss.types';
+import { Dungeon, DungeonLabel } from '../components/Dungeon/Dungeon.types';
 import {
-	PlayerStats, Class
+	PlayerStats, Class, ClassLabel
 } from '../components/Character/Character.types';
-
+import { ordinalize } from '../utils';
 
 export type DataContextType = {
 	currentSaveGame?: string,
-	saveGames?: Map<string, SaveGameType>,
+	saveGames: Map<string, SaveGameType>,
 	getCurrentSaveGameData: () => SaveGameType,
-	setCurrentSaveGame: (key: string) => void;
+	setCurrentSaveGame: (key?: string) => void;
 	setBoss: ({ boss }: { boss: Boss }) => void;
 	setDungeon: ({ dungeon, index }: { dungeon: Dungeon, index: 0 | 1 | 2 }) => void;
 	setCharacter: ({ playerStats, index }: { playerStats: PlayerStats, index: Class }) => void;
-	newSaveGame?: (key: string) => void,
-	deleteSaveGame?: (keyToDelete: string) => void
+	newSaveGame: (key: string) => void,
+	deleteSaveGame: (keyToDelete: string) => void
 }
+
+export type DataContextTypeData = Pick<DataContextType, "currentSaveGame" | "saveGames">;
+
+export type DataContextTypeMethods = Pick<DataContextType,
+	"getCurrentSaveGameData" |
+	"setCurrentSaveGame" |
+	"setBoss" |
+	"setDungeon" |
+	"setCharacter" |
+	"newSaveGame" |
+	"deleteSaveGame"
+>;
 
 export type SaveGameType = {
 	boss?: Boss;
@@ -31,29 +43,39 @@ export type SaveGameType = {
 }
 
 
-export const DataContext = createContext<DataContextType>({});
+export const DataContext = createContext<DataContextType>({
+	saveGames: new Map<string, SaveGameType>(),
+	getCurrentSaveGameData: () => { throw new Error(`DataProvider must be used in order to get the current save game data`) },
+
+	setCurrentSaveGame: (key?: string) => { throw new Error(`DataProvider must be used in order to use ${key} as current save game key`) },
+
+	setBoss: ({ boss }: { boss: Boss }) => { throw new Error(`DataProvider must be used in order to use ${BossLabel.get(boss)} as the final boss`) },
+
+	setDungeon: ({ dungeon, index }: { dungeon: Dungeon, index: 0 | 1 | 2 }) => { throw new Error(`DataProvider must be used in order to use ${DungeonLabel.get(dungeon)} as the ${ordinalize((index + 1), 4)}`) },
+
+	setCharacter: ({ playerStats, index }: { playerStats: PlayerStats, index: Class }) => {
+		throw new Error(`DataProvider must be used in order to save the player stats ${JSON.stringify(playerStats)} for the ${ClassLabel.get(index)}`);
+	},
+
+	newSaveGame: (key: string) => { throw new Error(`DataProvider must be used in order to create a new savegame for the key ${key}`); },
+
+	deleteSaveGame: (keyToDelete: string) => { throw new Error(`DataProvider must be used in order to delete the savegame for the key ${keyToDelete}`); }
+});
 
 type DataProviderProps = {
 	children?: React.ReactNode
 }
 export const DataProvider = ({ children }: DataProviderProps) => {
 	// this state will be shared with all components 
+	const [data, setData] = useState<DataContextTypeData>(() => (getFromLocalStorage()));
 
-	const [data, setData] = useState<DataContextType>(getFromLocalStorage);
-
-	const { currentSaveGame, saveGames } = data;
-
-	useEffect(() => {
-		setInLocalStorage(data);
-	}, [data]);
-
-	const setCurrentSaveGame = (key: string) => {
+	const setCurrentSaveGame = (key?: string) => {
 		setData({ currentSaveGame: key, saveGames });
 	}
-	const getCurrentSaveGameData = () => saveGames.get(currentSaveGame);
+	const getCurrentSaveGameData = () => (currentSaveGame ? saveGames.get(currentSaveGame) : {}) || {};
 
 	const saveCurrentSaveGame = (savegame: SaveGameType) => {
-		setData({ currentSaveGame, saveGames: new Map(saveGames.set(currentSaveGame, savegame)) });
+		setData({ currentSaveGame, saveGames: new Map(currentSaveGame ? saveGames.set(currentSaveGame, savegame) : saveGames) });
 	}
 
 	const newSaveGame = (key: string) => {
@@ -87,8 +109,8 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 
 
 	const setBoss = ({ boss }: { boss: Boss }) => {
-		const currentSaveGameData = saveGames.get(currentSaveGame);
-		console.log(currentSaveGame, currentSaveGameData);
+		const currentSaveGameData = (currentSaveGame ? saveGames.get(currentSaveGame) : { dungeons: [] }) || { dungeons: [] };
+
 		const dungeons = [...currentSaveGameData.dungeons!];
 		dungeons[3] = BossDungeonMap.get(Number(boss));
 
@@ -103,7 +125,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 
 	}
 	const setDungeon = ({ dungeon, index }: { dungeon: Dungeon, index: 0 | 1 | 2 }) => {
-		const saveGame = saveGames.get(currentSaveGame);
+		const saveGame = (currentSaveGame ? saveGames.get(currentSaveGame) : { dungeons: [] }) || { dungeons: [] };
 		const dungeons = [...saveGame.dungeons!];
 
 		dungeons[index] = dungeon;
@@ -116,9 +138,9 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 	}
 
 	const setCharacter = ({ playerStats, index }: { playerStats: PlayerStats, index: Class }) => {
-		const saveGame = saveGames.get(currentSaveGame);
+		const saveGame = currentSaveGame ? saveGames.get(currentSaveGame) : undefined;
 
-		const { players } = saveGame;
+		const { players } = saveGame || { players: {} };
 
 		const newSaveGame = {
 			...saveGame,
@@ -128,18 +150,32 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 		saveCurrentSaveGame(newSaveGame);
 	}
 
+	const methods: DataContextTypeMethods = {
+		getCurrentSaveGameData,
+		setBoss,
+		setDungeon,
+		setCharacter,
+		setCurrentSaveGame,
+		newSaveGame,
+		deleteSaveGame
+	}
+
+
+
+	const { currentSaveGame, saveGames } = data;
+
+	useEffect(() => {
+		setInLocalStorage(data);
+	}, [data]);
+
+
+
 	return (
 		<DataContext.Provider
 			value={{
 				currentSaveGame,
-				getCurrentSaveGameData,
 				saveGames,
-				setBoss,
-				setDungeon,
-				setCharacter,
-				setCurrentSaveGame,
-				newSaveGame,
-				deleteSaveGame
+				...methods
 			}}
 		>
 			{children}

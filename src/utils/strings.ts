@@ -1,10 +1,14 @@
+import { Dungeon } from "../components/Dungeon/Dungeon.types"
+import { Boss } from "../components/Boss/Boss.types"
+import { ObjectLooted } from "../components/Character/Character.types"
+
 export const capitalize = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 
 
-export const enumToOptions = (e, dict, keyToIgnore) => Object.keys(e)
+export const enumToOptions = (e: Dungeon | Boss | ObjectLooted, dict?: Map<number, string>, keyToIgnore?: Dungeon | Boss | ObjectLooted) => Object.keys(e)
 	.filter(([key,]) => dict ? !isNaN(Number(key)) : isNaN(Number(key)))
 	.filter(([key,]) => key !== keyToIgnore?.toString())
-	.map((key) => dict ? ({ value: key, label: dict.get(Number(key)) }) : ({ value: key, label: key })
+	.map((key) => dict ? ({ value: key, label: dict.get(Number(key)!) }) : ({ value: key, label: key })
 	)
 
 

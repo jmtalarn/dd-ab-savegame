@@ -35,7 +35,7 @@ const Dungeon = (
       <Form.Item name="dungeon" label="Dungeon">
         <Select
           placeholder="Select a dungeon"
-          options={enumToOptions(Dungeons, DungeonLabel, dungeonToIgnore)} />
+          options={enumToOptions(Dungeons as unknown as Dungeons, DungeonLabel, dungeonToIgnore)} />
       </Form.Item>
       {!blocked && children}
 
