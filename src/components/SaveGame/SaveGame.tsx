@@ -54,6 +54,7 @@ const SaveGame = ({ onDeleteGame, onSetCurrentSaveGame, onSaveGame, saveGames }:
       onCancel={() => { }}
       okText="Yes"
       cancelText="No"
+      overlayClassName={styles['pop-confirm']}
     >
       <Button
         className={styles['save-button']}
@@ -73,7 +74,9 @@ const SaveGame = ({ onDeleteGame, onSetCurrentSaveGame, onSaveGame, saveGames }:
           onConfirm={() => deleteSaveGame(savegame)}
           onCancel={() => { }}
           okText="Yes"
-          cancelText="No">
+          cancelText="No"
+          overlayClassName={styles['pop-confirm']}
+        >
           <Button danger shape="circle" icon={<FontAwesomeIcon icon={faTrashCan} />} />
         </Popconfirm>
       </div>

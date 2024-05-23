@@ -2,6 +2,13 @@ button {
   min-width: 18rem;
 }
 
+.pop-confirm :global(.ant-popconfirm-buttons) {
+  flex-wrap: wrap;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
 .save-button {
   margin-bottom: 1rem;
   display: flex;
